@@ -1,0 +1,14 @@
+<template name="item">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
+      <a href="{{pathFor 'items'}}">← Back</a>
+      {{#with item}}
+      <div class="item">
+        <h3>{{title}}</h3>
+        <p>{{body}}</p>
+        <p id="textArea" class="editable" data-type="textarea" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{body}}</p>
+      </div>
+      {{/with}}
+    </div>
+  </div>
+</template>
