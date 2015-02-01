@@ -5,8 +5,15 @@
       {{#with item}}
       <div class="item">
         <h3>{{title}}</h3>
-        <p>{{body}}</p>
-        <p id="textArea" class="editable" data-type="textarea" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{body}}</p>
+        <p
+          id="textArea"
+          class="editable"
+          data-type="textarea"
+          data-placeholder="Enter text"
+          data-emptytext="Click to enter text"
+          data-rows="4">
+          {{body}}
+        </p>
       </div>
       {{/with}}
     </div>
