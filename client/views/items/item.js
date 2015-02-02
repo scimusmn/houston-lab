@@ -13,17 +13,29 @@ Template.item.helpers({
 
 Template.item.rendered = function () {
     var itemId = this.data.item._id;
-    $('#textArea.editable').editable({
+    $('.editable').editable({
         success: function(response, newValue) {
+            //
             // Update this item
-            Items.update(itemId, {$set: {body: newValue}}, function(error) {
-                // Display an error to the user.
+            //
+
+            // Determine the field to update
+            var updatedField = $(this).data('field-name');
+
+            // Build the query
+            var query = {$set: {}};
+            query.$set[updatedField] = newValue;
+
+            // Update content in the database
+            Items.update(itemId, query, function(error) {
+                // Display an error to the user if needed
                 if (error) {
                     alert(error.reason);
                 } else {
                     console.log('Content saved');
                 }
             });
+
         }
     });
 };

@@ -4,7 +4,15 @@
       <a href="{{pathFor 'items'}}">← Back</a>
       {{#with item}}
       <div class="item">
-        <h3>{{title}}</h3>
+        <h3
+          id="text"
+          class="editable"
+          data-display="false"
+          data-type="text"
+          data-field-name="title"
+          data-rows="4">
+          {{title}}
+        </h3>
         <p
           id="textArea"
           class="editable"
@@ -12,6 +20,7 @@
           data-type="textarea"
           data-placeholder="Enter text"
           data-emptytext="Click to enter text"
+          data-field-name="body"
           data-rows="4">
           {{body}}
         </p>
