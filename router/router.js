@@ -79,6 +79,38 @@ Router.map(function() {
     });
 
     /**
+     * All components
+     */
+    this.route('components', {
+        waitOn: function () {
+            return Meteor.subscribe('allComponents');
+        },
+        data: function () {
+            return {
+                components: Components.find()
+            };
+        }
+    });
+
+    /**
+     * Single component
+     *
+     * TODO: Look at the router documentation and spell out the purpose of
+     * each of these waitOn, data distinctions.
+     */
+    this.route('component', {
+        path: '/components/:link',
+        waitOn: function () {
+            return Meteor.subscribe('singleComponent', this.params.link);
+        },
+        data: function () {
+            return {
+                component: Components.findOne({link: this.params.link})
+            };
+        }
+    });
+
+    /**
      * All items
      */
     this.route('items', {

@@ -7,6 +7,16 @@
 // Use dimsum to create dummy content in style of the zwordy wifpho nordool
 dimsum.configure({ flavor: 'jabberwocky' });
 
+if (Components.find().count() === 0) {
+    Components.insert({
+        order: 1,
+        link: 'anti-bacteria',
+        title: 'Anti Bacteria',
+        body: 'At this experiment'
+    });
+
+}
+
 if (Items.find().count() === 0) {
 
     var entries = 500;

@@ -16,6 +16,24 @@
  */
 
 /**
+ * All components
+ */
+Meteor.publish('allComponents', function() {
+    var result = Components.find();
+    return result;
+});
+
+/**
+ * Single component
+ *
+ * TODO: document the argument
+ */
+Meteor.publish('singleComponent', function(link) {
+    var result = Components.find( { link: link } );
+    return result;
+});
+
+/**
  * All items
  */
 Meteor.publish('allItems', function() {
