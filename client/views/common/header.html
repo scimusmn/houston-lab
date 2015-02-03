@@ -1,8 +1,11 @@
 <template name="header">
   <div class="header">
     <nav class="navbar navbar-default">
+
+      <!-- Fluid container for whole navbar -->
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <!-- Brand -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -13,13 +16,17 @@
           <a class="navbar-brand" href="{{pathFor 'homepage'}}">Chondrite Meteor Template</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!-- Links -->
+        <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="{{pathFor 'items'}}">Items</a></li>
+            <li><a href="{{pathFor 'components'}}">Components</a></li>
           </ul>
+
         </div><!-- /.navbar-collapse -->
+
       </div><!-- /.container-fluid -->
+
     </nav>
   </div>
   <hr/>

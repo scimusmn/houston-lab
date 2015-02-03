@@ -142,6 +142,15 @@ Router.map(function() {
         }
     });
 
+
+    this.route('userProfile', {
+        path: '/profile',
+        template: 'profile',
+        onBeforeAction: function () {
+            AccountsEntry.signInRequired(this);
+        }
+    });
+
 });
 
 /**

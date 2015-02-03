@@ -10,6 +10,15 @@ dimsum.configure({ flavor: 'jabberwocky' });
 if (Components.find().count() === 0) {
     Components.insert({
         order: 1,
+        componentNum: '0101',
+        link: 'cheek-cells',
+        title: 'DNA extraction',
+        body: 'At this experiment'
+    });
+
+    Components.insert({
+        order: 2,
+        componentNum: '0102',
         link: 'anti-bacteria',
         title: 'Anti Bacteria',
         body: 'At this experiment'

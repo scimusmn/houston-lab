@@ -1,0 +1,4 @@
+AccountsEntry.config({
+    homeRoute: '/',
+    dashboardRoute: '/'
+});
