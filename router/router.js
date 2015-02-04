@@ -105,12 +105,34 @@ Router.map(function() {
     this.route('component', {
         path: '/components/:link',
         waitOn: function () {
-            return Meteor.subscribe('singleComponent', this.params.link);
+            var result = Components.findOne( { link: this.params.link } );
+            console.log('result.componentNumber - ', result.componentNumber);
+            return [
+                Meteor.subscribe('singleComponent', this.params.link),
+                //Meteor.subscribe('pages', {'componentNumber': result.componentNumber} )
+                Meteor.subscribe('pages', result.componentNumber )
+            ];
         },
         data: function () {
             return {
                 component: Components.findOne({link: this.params.link})
             };
+        }
+    });
+
+    /**
+     * Each top level page in the component
+     */
+    this.route('page', {
+        path: '/:colorPalate/:link',
+        waitOn: function() {
+            return [
+                Meteor.subscribe('singlePage', this.params.colorPalate, this.params.link)
+            ];
+        },
+        data: function() {
+            var result = Pages.findOne( { 'link': this.params.link } );
+            return result;
         }
     });
 

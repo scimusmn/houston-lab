@@ -10,7 +10,7 @@ dimsum.configure({ flavor: 'jabberwocky' });
 if (Components.find().count() === 0) {
     Components.insert({
         order: 1,
-        componentNum: '0101',
+        componentNumber: '0101',
         link: 'cheek-cells',
         title: 'DNA extraction',
         body: 'At this experiment'
@@ -18,13 +18,33 @@ if (Components.find().count() === 0) {
 
     Components.insert({
         order: 2,
-        componentNum: '0102',
+        componentNumber: '0102',
         link: 'anti-bacteria',
         title: 'Anti Bacteria',
         body: 'At this experiment'
     });
 
 }
+
+if (Pages.find().count() === 0) {
+    Pages.insert({
+        order: 1,
+        componentNumber: '0101',
+        link: 'start-brand-new',
+        title: 'Page number one',
+        body: 'At this experiment'
+    });
+
+    Pages.insert({
+        order: 2,
+        componentNumber: '0101',
+        link: 'call-my-own',
+        title: 'Page number two',
+        body: 'At this experiment'
+    });
+
+}
+
 
 if (Items.find().count() === 0) {
 

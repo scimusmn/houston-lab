@@ -6,12 +6,30 @@ Template.component.created = function () {
 };
 
 Template.component.helpers({
-    myHelper: function () {
-        //
+    pages: function() {
+        /**
+         * Return only top level pages, no sub-pages (aka pages with defined parentIds)
+         */
+        return Pages.find({});
+        //return Pages.find({
+            //$and: [
+                //{ componentId: this._id },
+                //{ parentId: {$exists: false} }
+            //],
+        //},
+        //{
+            //sort: {order: 1}
+        //});
     }
 });
 
 Template.component.rendered = function () {
+    var components = Components.findOne({});
+    console.log('components - ', components);
+
+    var pages = Pages.findOne({});
+    console.log('pages - ', pages);
+
     var componentId = this.data.component._id;
     $('.editable').editable({
         success: function(response, newValue) {

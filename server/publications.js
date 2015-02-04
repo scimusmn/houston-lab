@@ -34,6 +34,26 @@ Meteor.publish('singleComponent', function(link) {
 });
 
 /**
+ * Pages
+ */
+Meteor.publish('pages', function(componentNumber) {
+    console.log('componentNumber - ', componentNumber);
+    var result = Pages.find({componentNumber: componentNumber}, {sort: {order: 1}});
+    console.log('result - ', result.fetch());
+    return result;
+});
+
+Meteor.publish('singlePage', function(colorPalate, link) {
+    /**
+     * Return any page with the URL ID
+     * as well as any subpages with the same parentId
+     */
+    var topPage = Pages.findOne( { $and: [ { 'colorPalate': colorPalate, 'link': link } ] } );
+    var id = topPage._id;
+    return id && Pages.find( { $or: [ {_id: id}, {parentId: id} ] } );
+});
+
+/**
  * All items
  */
 Meteor.publish('allItems', function() {
