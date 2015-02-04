@@ -4,14 +4,32 @@
       <a href="{{pathFor 'components'}}">← Back</a>
       {{#with component}}
       <div class="component">
-        <h3
-          id="text"
-          class="editable"
-          data-display="false"
-          data-type="text"
-          data-field-name="title"
-          data-rows="4">
-          {{title}}
+        <h3>
+
+          <span
+            id="text"
+            class="editable"
+            data-display="false"
+            data-type="text"
+            data-field-name="componentNumber"
+            data-rows="4">
+            {{#if componentNumber}}
+              {{componentNumber}}
+            {{else}}
+              ####
+            {{/if}}
+          </span>
+          -
+          <span
+            id="text"
+            class="editable"
+            data-display="false"
+            data-type="text"
+            data-field-name="title"
+            data-rows="4">
+            {{title}}
+          </span>
+
         </h3>
         <p
           id="textArea"

@@ -19,7 +19,7 @@
  * All components
  */
 Meteor.publish('allComponents', function() {
-    var result = Components.find();
+    var result = Components.find({}, {sort: {componentNumber: 1}});
     return result;
 });
 

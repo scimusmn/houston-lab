@@ -4,9 +4,10 @@
       <h3>Components</h3>
       <ul>
         {{#each components}}
-          <li><a href="{{pathFor "component"}}">{{title}}</a></li>
+          <li><a href="{{pathFor "component"}}">{{componentNumber}} - {{title}}</a></li>
         {{/each}}
       </ul>
+      <a class="btn btn-primary" href="components/submit">Add new component</a>
     </div>
   </div>
 </template>
