@@ -103,19 +103,18 @@ Router.map(function() {
      * each of these waitOn, data distinctions.
      */
     this.route('component', {
-        path: '/components/:link',
+        path: '/components/:componentNumber',
         waitOn: function () {
-            var result = Components.findOne( { link: this.params.link } );
-            console.log('result.componentNumber - ', result.componentNumber);
+            //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
             return [
-                Meteor.subscribe('singleComponent', this.params.link),
+                Meteor.subscribe('singleComponent', this.params.componentNumber),
                 //Meteor.subscribe('pages', {'componentNumber': result.componentNumber} )
-                Meteor.subscribe('pages', result.componentNumber )
+                Meteor.subscribe('pages', this.params.componentNumber)
             ];
         },
         data: function () {
             return {
-                component: Components.findOne({link: this.params.link})
+                component: Components.findOne({componentNumber: this.params.componentNumber})
             };
         }
     });
@@ -124,15 +123,21 @@ Router.map(function() {
      * Each top level page in the component
      */
     this.route('page', {
-        path: '/:colorPalate/:link',
-        waitOn: function() {
+        path: '/components/:componentNumber/:link',
+        waitOn: function () {
             return [
-                Meteor.subscribe('singlePage', this.params.colorPalate, this.params.link)
+                Meteor.subscribe('singlePage', this.params.componentNumber, this.params.link )
             ];
         },
-        data: function() {
-            var result = Pages.findOne( { 'link': this.params.link } );
-            return result;
+        // Data is the information exposed to the tempalte spacebars elements
+        // for instance
+        //      {{#with page}}
+        //      {{#with component}}
+        data: function () {
+            return {
+                //component: Components.findOne({componentNumber: this.params.componentNumber})
+                page: Pages.findOne({})
+            };
         }
     });
 

@@ -25,10 +25,8 @@ Template.component.helpers({
 
 Template.component.rendered = function () {
     var components = Components.findOne({});
-    console.log('components - ', components);
 
     var pages = Pages.findOne({});
-    console.log('pages - ', pages);
 
     var componentId = this.data.component._id;
     $('.editable').editable({

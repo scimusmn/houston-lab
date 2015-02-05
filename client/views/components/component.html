@@ -47,7 +47,9 @@
       {{/with}}
 
       {{#each pages}}
-        {{title}}<br>
+        <a href="{{pathFor 'page'}}">
+          {{title}}
+        </a>
       {{/each}}
 
     </div>
