@@ -2,11 +2,24 @@
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
       <h3>Components</h3>
-      <ul>
-        {{#each components}}
-          <li><a href="{{pathFor "component"}}">{{componentNumber}} - {{title}}</a></li>
-        {{/each}}
-      </ul>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each components}}
+            <tr>
+              <td><a href="{{pathFor "component"}}">{{componentNumber}}</a></td>
+              <td><a href="{{pathFor "component"}}">{{title}}</a></td>
+              <td>Delete</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
       <a class="btn btn-primary" href="components/submit">Add new component</a>
     </div>
   </div>
