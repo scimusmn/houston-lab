@@ -1,3 +1,7 @@
 body {
   background-image: url("/images/seamless_paper_texture.png");
 }
+
+.container {
+  max-width: 1024px;
+}
