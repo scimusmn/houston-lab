@@ -28,8 +28,8 @@ Meteor.publish('allComponents', function() {
  *
  * TODO: document the argument
  */
-Meteor.publish('singleComponent', function(componentNumber) {
-    var result = Components.find( { componentNumber: componentNumber } );
+Meteor.publish('singleComponent', function(componentNumber, link) {
+    var result = Components.find( { $and: [ { componentNumber: componentNumber }, {link: link} ] });
     return result;
 });
 

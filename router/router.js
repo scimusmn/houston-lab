@@ -103,11 +103,11 @@ Router.map(function() {
      * each of these waitOn, data distinctions.
      */
     this.route('component', {
-        path: '/components/:componentNumber',
+        path: '/components/:componentNumber' + '-' + ':link',
         waitOn: function () {
             //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
             return [
-                Meteor.subscribe('singleComponent', this.params.componentNumber),
+                Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
                 //Meteor.subscribe('pages', {'componentNumber': result.componentNumber} )
                 Meteor.subscribe('pages', this.params.componentNumber)
             ];
