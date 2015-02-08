@@ -16,7 +16,8 @@ Components.attachSchema(new SimpleSchema({
     },
     link: {
         type: String,
-        label: 'Link'
+        label: 'Link',
+        regEx: /^[.a-zA-Z0-9-]+$/
     },
     body: {
         type: String,
@@ -28,3 +29,9 @@ Components.attachSchema(new SimpleSchema({
         }
     }
 }));
+
+Components.simpleSchema().messages({
+    'regEx link': [
+        { msg: '[label]s can only include lowercase letters, numbers, and the - character.' },
+    ]
+});
