@@ -1,6 +1,11 @@
 Template.componentSubmit.events({
-    'submit form': function(e) {
-        console.log('formclicked');
-        Router.go('components');
+    //
+});
+
+AutoForm.hooks({
+    insertComponentsForm: {
+        onSuccess: function(operation, result, template) {
+            Router.go('components');
+        }
     }
 });
