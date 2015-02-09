@@ -57,5 +57,9 @@ Template.component.rendered = function () {
 };
 
 Template.component.events({
-    //
+    'click #start-over': function(e) {
+        e.preventDefault();
+        Router.go('components');
+        console.log('start over clicked');
+    }
 });
