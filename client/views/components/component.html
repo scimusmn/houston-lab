@@ -6,13 +6,7 @@
       <div class="component">
         <h3>
 
-          <span
-            id="text"
-            class="editable"
-            data-display="false"
-            data-type="text"
-            data-field-name="componentNumber"
-            data-rows="4">
+          <span id="text" class="editable" data-type="text" data-field-name="componentNumber">
             {{#if componentNumber}}
               {{componentNumber}}
             {{else}}
@@ -20,26 +14,12 @@
             {{/if}}
           </span>
           -
-          <span
-            id="text"
-            class="editable"
-            data-display="false"
-            data-type="text"
-            data-field-name="title"
-            data-rows="4">
+          <span id="text" class="editable" data-type="text" data-field-name="title">
             {{title}}
           </span>
 
         </h3>
-        <p
-          id="textArea"
-          class="editable"
-          data-display="false"
-          data-type="textarea"
-          data-placeholder="Enter text"
-          data-emptytext="Click to enter text"
-          data-field-name="body"
-          data-rows="4">
+        <p id="textArea" class="editable" data-type="textarea" data-field-name="body">
           {{body}}
         </p>
       </div>

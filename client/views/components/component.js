@@ -30,31 +30,37 @@ Template.component.rendered = function () {
     var pages = Pages.findOne({});
 
     var componentId = this.data.component._id;
-    $('.editable').editable({
-        success: function(response, newValue) {
-            //
-            // Update this component
-            //
+    if (Meteor.user()) {
+        $('.editable').data('display', false);
+        $('.editable').editable({
+            success: function(response, newValue) {
+                //
+                // Update this component
+                //
 
-            // Determine the field to update
-            var updatedField = $(this).data('field-name');
+                // Determine the field to update
+                var updatedField = $(this).data('field-name');
 
-            // Build the query
-            var query = {$set: {}};
-            query.$set[updatedField] = newValue;
+                // Build the query
+                var query = {$set: {}};
+                query.$set[updatedField] = newValue;
 
-            // Update content in the database
-            Components.update(componentId, query, function(error) {
-                // Display an error to the user if needed
-                if (error) {
-                    alert(error.reason);
-                } else {
-                    console.log('Content saved');
-                }
-            });
+                // Update content in the database
+                Components.update(componentId, query, function(error) {
+                    // Display an error to the user if needed
+                    if (error) {
+                        alert(error.reason);
+                    } else {
+                        console.log('Content saved');
+                    }
+                });
 
-        }
-    });
+            }
+        });
+    }
+    else {
+        $('.editable').removeClass('editable');
+    }
 };
 
 Template.component.events({
