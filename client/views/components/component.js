@@ -24,6 +24,7 @@ Template.component.helpers({
 });
 
 Template.component.rendered = function () {
+
     var components = Components.findOne({});
 
     var pages = Pages.findOne({});

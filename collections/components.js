@@ -35,3 +35,15 @@ Components.simpleSchema().messages({
         { msg: '[label]s can only include lowercase letters, numbers, and the - character.' },
     ]
 });
+
+/**
+ * Allow posting if you're logged in
+ */
+Components.allow({
+    'insert': function (userId, doc) {
+        return !! userId;
+    },
+    'update': function (userId, doc) {
+        return !! userId;
+    }
+});
