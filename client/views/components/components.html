@@ -7,7 +7,9 @@
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>Operations</th>
+            {{#if currentUser}}
+              <th>Operations</th>
+            {{/if}}
           </tr>
         </thead>
         <tbody>
@@ -15,7 +17,9 @@
             <tr>
               <td><a href="{{pathFor "component"}}">{{componentNumber}}</a></td>
               <td><a href="{{pathFor "component"}}">{{title}}</a></td>
-              <td>{{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}</td>
+              {{#if currentUser}}
+                <td>{{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}</td>
+              {{/if}}
             </tr>
           {{/each}}
         </tbody>

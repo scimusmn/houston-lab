@@ -93,7 +93,10 @@ Router.map(function() {
     });
 
     this.route('componentSubmit', {
-        path: '/components/submit'
+        path: '/components/submit',
+        onBeforeAction: function () {
+            AccountsEntry.signInRequired(this);
+        }
     });
 
     /**
