@@ -24,7 +24,9 @@
           {{/each}}
         </tbody>
       </table>
-      <a class="btn btn-primary" href="components/submit">Add new component</a>
+      {{#if currentUser}}
+        <a class="btn btn-primary" href="components/submit">Add new component</a>
+      {{/if}}
     </div>
   </div>
 </template>
