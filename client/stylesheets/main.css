@@ -1,3 +1,6 @@
+/**
+ * Primary elements
+ */
 body {
   background-image: url("/images/seamless_paper_texture.png");
 }
@@ -5,4 +8,13 @@ body {
 .container {
   max-width: 1024px;
   background: #FFF;
+}
+
+/**
+ * Component
+ */
+
+.navigation {
+  background: #333;
+  padding: 20px;
 }
