@@ -3,34 +3,49 @@
     <div class="col-lg-12">
 
       {{#with component}}
-      <div class="component">
-        <h3>
+        <div class="component">
+          Current language: {{currentLanguage}}<br>
+          Current language: {{$.Session.get 'currentLanguage'}}<br>
+          Is it English? {{$.Session.equals 'currentLanguage' 'en'}}<br>
+          Is it Spanish? {{$.Session.equals 'currentLanguage' 'es'}}
+          <h3>
 
-          <span id="text" class="editable" data-type="text" data-field-name="componentNumber">
-            {{#if componentNumber}}
-              {{componentNumber}}
+            <span id="text" class="editable" data-type="text" data-field-name="componentNumber">
+              {{#if componentNumber}}
+                {{componentNumber}}
+                {{else}}
+                ####
+              {{/if}}
+            </span>
+            -
+            {{#if $.Session.equals 'currentLanguage' 'en'}}
+              <span id="text" class="editable" data-type="text" data-field-name="title">
+                {{title}}
+              </span>
             {{else}}
-              ####
+              <span id="text" class="editable" data-type="text" data-field-name="titleEs">
+                This is SPANISH
+                {{#if titleEs}}
+                  {{titleEs}}
+                  {{else}}
+                  ----
+                {{/if}}
+              </span>
             {{/if}}
-          </span>
-          -
-          <span id="text" class="editable" data-type="text" data-field-name="title">
-            {{title}}
-          </span>
 
-        </h3>
-        <p id="textArea" class="editable" data-type="textarea" data-field-name="body">{{body}}</p>
-      </div>
+          </h3>
+          <p id="textArea" class="editable" data-inputclass="ta-edit" data-type="textarea" data-field-name="body">{{body}}</p>
+        </div>
       {{/with}}
 
-      {{#each pages}}
-        <a href="{{pathFor 'page'}}">
-          {{title}}
-        </a>
-      {{/each}}
+      <ul>
+        {{#each pages}}
+          <li><a href="{{pathFor 'page'}}"> {{title}} </a></li>
+        {{/each}}
+      </ul>
 
       <div class="navigation">
-        <div class="btn-group btn-group-justified" role="group" >
+        <div class="btn-group btn-group-lg btn-group-justified" role="group" >
           <a href="#" id="start-over" class="btn btn-default start-over">Start over</a>
           <a href="#" id="back" class="btn btn-default">Back</a>
           <a href="#" id="forward" class="btn btn-default">Forward</a>

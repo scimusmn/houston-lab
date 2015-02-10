@@ -14,6 +14,10 @@ Components.attachSchema(new SimpleSchema({
         type: String,
         label: 'Title'
     },
+    titleEs: {
+        type: String,
+        label: 'Title'
+    },
     link: {
         type: String,
         label: 'Link',
