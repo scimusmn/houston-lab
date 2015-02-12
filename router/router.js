@@ -207,20 +207,6 @@ Router.map(function() {
 
 });
 
-var requireLogin = function() {
-    if (! Meteor.user()) {
-        if (Meteor.loggingIn()) {
-            this.render(this.loadingTemplate);
-        } else {
-            this.render('accessDenied');
-        }
-    } else {
-        this.next();
-    }
-}
-
-//Router.onBeforeAction(requireLogin, {only: 'componentSubmit'});
-
 /**
  * Animate content
  *
