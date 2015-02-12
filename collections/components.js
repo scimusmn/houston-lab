@@ -16,7 +16,7 @@ Components.attachSchema(new SimpleSchema({
     },
     titleEs: {
         type: String,
-        label: 'Title'
+        label: 'Title - Spanish'
     },
     link: {
         type: String,
