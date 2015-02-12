@@ -10,7 +10,7 @@ Components.attachSchema(new SimpleSchema({
         label: 'Component number',
         max: 4
     },
-    comopnentLink: {
+    componentLink: {
         type: String,
         label: 'Link',
         regEx: /^[.a-zA-Z0-9-]+$/

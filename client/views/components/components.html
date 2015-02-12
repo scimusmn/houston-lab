@@ -16,7 +16,7 @@
           {{#each components}}
             <tr>
               <td><a href="{{pathFor "component"}}">{{componentNumber}}</a></td>
-              <td><a href="{{pathFor "component"}}">{{title}}</a></td>
+              <td><a href="{{pathFor "component"}}">{{componentTitle}}</a></td>
               {{#if currentUser}}
                 <td>{{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}</td>
               {{/if}}

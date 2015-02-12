@@ -62,23 +62,6 @@ Router.configure({
 Router.map(function() {
 
     /**
-     * Homepage
-     *
-     * This is identical to the all items page
-     */
-    this.route('homepage', {
-        path: '/',
-        waitOn: function () {
-            return Meteor.subscribe('allItems');
-        },
-        data: function () {
-            return {
-                items: Items.find()
-            };
-        }
-    });
-
-    /**
      **************************************************************************
      * Components
      **************************************************************************
@@ -88,6 +71,7 @@ Router.map(function() {
      * List of components
      */
     this.route('components', {
+        path: '/',
         waitOn: function () {
             return Meteor.subscribe('allComponents');
         },
@@ -105,11 +89,11 @@ Router.map(function() {
      * each of these waitOn, data distinctions.
      */
     this.route('component', {
-        path: '/components/:componentNumber' + '-' + ':link',
+        path: '/components/:componentNumber' + '-' + ':componentLink',
         waitOn: function () {
             //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
             return [
-                Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
+                Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.componentLink),
                 Meteor.subscribe('pages', this.params.componentNumber)
             ];
         },
