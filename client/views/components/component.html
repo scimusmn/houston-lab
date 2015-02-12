@@ -19,22 +19,21 @@
             </span>
             -
             {{#if $.Session.equals 'currentLanguage' 'en'}}
-              <span id="text" class="editable" data-type="text" data-field-name="title">
+              <span id="text" data-type="text" data-pk="{{_id}}" data-value="{{title}}" data-context="Components" data-field-name="title">
                 {{title}}
               </span>
             {{else}}
-              <span id="text" class="editable" data-type="text" data-field-name="titleEs">
-                This is SPANISH
+              <span id="text" data-type="text" data-field-name="titleEs">
                 {{#if titleEs}}
                   {{titleEs}}
-                  {{else}}
+                {{else}}
                   ----
                 {{/if}}
               </span>
             {{/if}}
 
           </h3>
-          <p id="textArea" class="editable" data-inputclass="ta-edit" data-type="textarea" data-field-name="body">{{body}}</p>
+          <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="body">{{body}}</p>
         </div>
       {{/with}}
 
