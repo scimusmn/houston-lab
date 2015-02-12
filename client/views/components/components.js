@@ -6,6 +6,9 @@ Template.components.created = function () {
 };
 
 Template.components.helpers({
+    components: function () {
+        return Components.find({}, {sort: {componentNumber: 1}});
+    },
     /**
      * Confirm component deletion
      */
