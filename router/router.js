@@ -92,6 +92,26 @@ Router.map(function() {
         }
     });
 
+    this.route('componentEdit', {
+        path: '/components/:componentNumber' + '-' + ':link/edit',
+        waitOn: function () {
+            //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
+            return [
+                Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
+                //Meteor.subscribe('pages', {'componentNumber': result.componentNumber} )
+                Meteor.subscribe('pages', this.params.componentNumber)
+            ];
+        },
+        onBeforeAction: function () {
+            AccountsEntry.signInRequired(this);
+            //this.next();
+        },
+        data: function () {
+            var result = Components.findOne( { $and: [ { componentNumber: this.params.componentNumber }, {link: this.params.link} ] });
+            return result;
+        }
+    });
+
     this.route('componentSubmit', {
         path: '/components/submit',
         onBeforeAction: function () {
