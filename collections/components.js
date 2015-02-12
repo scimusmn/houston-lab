@@ -10,20 +10,20 @@ Components.attachSchema(new SimpleSchema({
         label: 'Component number',
         max: 4
     },
-    link: {
+    comopnentLink: {
         type: String,
         label: 'Link',
         regEx: /^[.a-zA-Z0-9-]+$/
     },
-    title: {
+    componentTitle: {
         type: String,
         label: 'Title'
     },
-    titleEs: {
+    componentTitleEs: {
         type: String,
         label: 'Title - Spanish'
     },
-    body: {
+    componentBody: {
         type: String,
         label: 'Body',
         min: 20,

@@ -79,7 +79,13 @@ Router.map(function() {
     });
 
     /**
-     * All components
+     **************************************************************************
+     * Components
+     **************************************************************************
+     */
+
+    /**
+     * List of components
      */
     this.route('components', {
         waitOn: function () {
@@ -92,6 +98,41 @@ Router.map(function() {
         }
     });
 
+    /**
+     * Single component
+     *
+     * TODO: Look at the router documentation and spell out the purpose of
+     * each of these waitOn, data distinctions.
+     */
+    this.route('component', {
+        path: '/components/:componentNumber' + '-' + ':link',
+        waitOn: function () {
+            //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
+            return [
+                Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
+                Meteor.subscribe('pages', this.params.componentNumber)
+            ];
+        },
+        data: function () {
+            return {
+                component: Components.findOne({componentNumber: this.params.componentNumber})
+            };
+        }
+    });
+
+    /**
+     * Submit new components
+     */
+    this.route('componentSubmit', {
+        path: '/components/submit',
+        onBeforeAction: function () {
+            AccountsEntry.signInRequired(this);
+        }
+    });
+
+    /**
+     * Edit components
+     */
     this.route('componentEdit', {
         path: '/components/:componentNumber' + '-' + ':link/edit',
         waitOn: function () {
@@ -112,53 +153,23 @@ Router.map(function() {
         }
     });
 
-    this.route('componentSubmit', {
-        path: '/components/submit',
-        onBeforeAction: function () {
-            AccountsEntry.signInRequired(this);
-        }
-    });
-
-    this.route('pageSubmit', {
-        path: '/pages/submit',
-        onBeforeAction: function () {
-            AccountsEntry.signInRequired(this);
-        }
-    });
-
     /**
-     * Single component
-     *
-     * TODO: Look at the router documentation and spell out the purpose of
-     * each of these waitOn, data distinctions.
+     **************************************************************************
+     * Pages
+     **************************************************************************
      */
-    this.route('component', {
-        path: '/components/:componentNumber' + '-' + ':link',
-        waitOn: function () {
-            //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
-            return [
-                Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
-                //Meteor.subscribe('pages', {'componentNumber': result.componentNumber} )
-                Meteor.subscribe('pages', this.params.componentNumber)
-            ];
-        },
-        data: function () {
-            return {
-                component: Components.findOne({componentNumber: this.params.componentNumber})
-            };
-        }
-    });
 
     /**
      * Each top level page in the component
      */
     this.route('page', {
-        path: '/components/:componentNumber/:link',
+        path: '/components/:componentNumber/page/:link',
         waitOn: function () {
             return [
                 Meteor.subscribe('singlePage', this.params.componentNumber, this.params.link )
             ];
         },
+        //
         // Data is the information exposed to the tempalte spacebars elements
         // for instance
         //      {{#with page}}
@@ -170,6 +181,22 @@ Router.map(function() {
             };
         }
     });
+
+    /**
+     * Each top level page in the component
+     */
+    this.route('pageSubmit', {
+        path: '/pages/submit',
+        onBeforeAction: function () {
+            AccountsEntry.signInRequired(this);
+        }
+    });
+
+    /**
+     **************************************************************************
+     * Items
+     **************************************************************************
+     */
 
     /**
      * All items
@@ -203,6 +230,11 @@ Router.map(function() {
         }
     });
 
+    /**
+     **************************************************************************
+     * User profiles
+     **************************************************************************
+     */
     this.route('userProfile', {
         path: '/profile',
         template: 'profile',
@@ -212,9 +244,3 @@ Router.map(function() {
     });
 
 });
-
-/**
- * Animate content
- *
- * TODO: Add examples of animating content in on route change
- */

@@ -28,8 +28,11 @@ Meteor.publish('allComponents', function() {
  *
  * TODO: document the argument
  */
-Meteor.publish('singleComponent', function(componentNumber, link) {
-    var result = Components.find( { $and: [ { componentNumber: componentNumber }, {link: link} ] });
+Meteor.publish('singleComponent', function(componentNumber, componentLink) {
+    var result = Components.find( { $and: [
+        {componentNumber: componentNumber },
+        {componentLink: componentLink}
+    ] });
     return result;
 });
 
@@ -37,17 +40,21 @@ Meteor.publish('singleComponent', function(componentNumber, link) {
  * Pages
  */
 Meteor.publish('pages', function(componentNumber) {
-    var result = Pages.find({componentNumber: componentNumber}, {sort: {order: 1}});
+    var result = Pages.find(
+        {componentNumber: componentNumber},
+        {sort: {order: 1}}
+    );
     return result;
 });
 
-Meteor.publish('singlePage', function(componentNumber, link) {
-//Meteor.publish('singlePage', function(link) {
+Meteor.publish('singlePage', function(componentNumber, componentLink) {
     /**
      * Return any page with the URL ID
      * as well as any subpages with the same parentId
      */
-    var page = Pages.find( { $and: [ { 'componentNumber': componentNumber, 'link': link } ] } );
+    var page = Pages.find( { $and: [
+        {componentNumber: componentNumber, 'componentLink': componentLink }
+    ]});
     return page;
 });
 
