@@ -2,12 +2,26 @@
   <div class="row">
     <div class="col-lg-12">
 
+      {{#if currentUser}}
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="btn-group btn-group-lg btn-group-justified" role="group" >
+              <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
+              <a href="#" id="delete-link" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            Current language: {{currentLanguage}}<br>
+            Current language: {{$.Session.get 'currentLanguage'}}<br>
+            Is it English? {{$.Session.equals 'currentLanguage' 'en'}}<br>
+            Is it Spanish? {{$.Session.equals 'currentLanguage' 'es'}}
+          </div>
+        </div>
+        <hr>
+      {{/if}}
+
       {{#with component}}
         <div class="component">
-          Current language: {{currentLanguage}}<br>
-          Current language: {{$.Session.get 'currentLanguage'}}<br>
-          Is it English? {{$.Session.equals 'currentLanguage' 'en'}}<br>
-          Is it Spanish? {{$.Session.equals 'currentLanguage' 'es'}}
           <h3>
 
             <span id="text" class="editable" data-type="text" data-field-name="componentNumber">
