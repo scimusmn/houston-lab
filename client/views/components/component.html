@@ -33,17 +33,25 @@
             </span>
             -
             {{#if $.Session.equals 'currentLanguage' 'en'}}
-              <span id="text" data-type="text" data-pk="{{_id}}" data-value="{{title}}" data-context="Components" data-field-name="title">
-                {{title}}
+
+              <span
+                id="text" data-type="text" data-pk="{{_id}}"
+                data-value="{{componentTitle}}" data-context="Components"
+                data-field-name="{{componentTitle}}"
+              >
+                {{componentTitle}}
               </span>
+
             {{else}}
-              <span id="text" data-type="text" data-field-name="titleEs">
-                {{#if titleEs}}
-                  {{titleEs}}
+
+              <span id="text" data-type="text" data-field-name="componentTitleEs">
+                {{#if componentTitleEs}}
+                  {{componentTitleEs}}
                 {{else}}
                   ----
                 {{/if}}
               </span>
+
             {{/if}}
 
           </h3>
