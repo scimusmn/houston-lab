@@ -10,6 +10,11 @@ Components.attachSchema(new SimpleSchema({
         label: 'Component number',
         max: 4
     },
+    link: {
+        type: String,
+        label: 'Link',
+        regEx: /^[.a-zA-Z0-9-]+$/
+    },
     title: {
         type: String,
         label: 'Title'
@@ -17,11 +22,6 @@ Components.attachSchema(new SimpleSchema({
     titleEs: {
         type: String,
         label: 'Title - Spanish'
-    },
-    link: {
-        type: String,
-        label: 'Link',
-        regEx: /^[.a-zA-Z0-9-]+$/
     },
     body: {
         type: String,

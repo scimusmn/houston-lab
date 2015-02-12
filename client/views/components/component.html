@@ -51,11 +51,18 @@
         </div>
       {{/with}}
 
-      <ul>
-        {{#each pages}}
-          <li><a href="{{pathFor 'page'}}"> {{title}} </a></li>
-        {{/each}}
-      </ul>
+      {{#each pages}}
+        <!--<div class="animated fadeInLeft"><a href="{{pathFor 'page'}}"> {{order}} - {{title}} </a></div>-->
+        <div class="animated fadeInLeft">
+          {{order}} - {{title}} -
+          {{#if currentUser}}
+            <a class="edit-page-link" href="#">edit</a>
+          {{/if}}
+        </div>
+      {{/each}}
+      {{#if currentUser}}
+        <a class="btn btn-primary" href="/pages/submit">Add new page</a>
+      {{/if}}
 
       <div class="navigation">
         <div class="btn-group btn-group-lg btn-group-justified" role="group" >

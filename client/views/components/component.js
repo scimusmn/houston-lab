@@ -16,7 +16,7 @@ Template.component.helpers({
         /**
          * Return only top level pages, no sub-pages (aka pages with defined parentIds)
          */
-        return Pages.find({});
+        return Pages.find({}, {sort: {order: 1}});
     }
 });
 
@@ -28,6 +28,10 @@ Template.component.events({
     'click #edit-link': function(e) {
         e.preventDefault();
         Router.go( Router.current().location.get().path + '/edit' );
+    },
+    'click .edit-page-link': function(e) {
+        e.preventDefault();
+        console.log('this - ', this);
     },
     'click #start-over': function(e) {
         e.preventDefault();

@@ -119,6 +119,13 @@ Router.map(function() {
         }
     });
 
+    this.route('pageSubmit', {
+        path: '/pages/submit',
+        onBeforeAction: function () {
+            AccountsEntry.signInRequired(this);
+        }
+    });
+
     /**
      * Single component
      *
