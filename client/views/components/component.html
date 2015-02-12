@@ -55,7 +55,7 @@
             {{/if}}
 
           </h3>
-          <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="body">{{body}}</p>
+          <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBody">{{componentBody}}</p>
         </div>
       {{/with}}
 
@@ -69,7 +69,7 @@
         </div>
       {{/each}}
       {{#if currentUser}}
-        <a class="btn btn-primary" href="/pages/submit">Add new page</a>
+        <a class="btn btn-primary" href="/pages/submit?componentNumber={{component.componentNumber}}&link={{component.componentLink}}">Add new page</a>
       {{/if}}
 
       <div class="navigation">
