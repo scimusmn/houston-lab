@@ -131,7 +131,7 @@ Router.map(function() {
             AccountsEntry.signInRequired(this);
         },
         data: function () {
-            var result = Components.findOne( { $and: [ { componentNumber: this.params.componentNumber }, {link: this.params.link} ] });
+            var result = Components.findOne( { $and: [ { componentNumber: this.params.componentNumber }, { componentLink: this.params.link } ] });
             return result;
         }
     });
