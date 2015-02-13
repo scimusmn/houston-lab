@@ -129,7 +129,6 @@ Router.map(function() {
         },
         onBeforeAction: function () {
             AccountsEntry.signInRequired(this);
-            //this.next();
         },
         data: function () {
             var result = Components.findOne( { $and: [ { componentNumber: this.params.componentNumber }, {link: this.params.link} ] });
