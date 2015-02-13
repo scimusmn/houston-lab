@@ -31,6 +31,15 @@ Components.attachSchema(new SimpleSchema({
         autoform: {
             rows: 5
         }
+    },
+    componentBodyEs: {
+        type: String,
+        label: 'Body - Spanish',
+        min: 20,
+        max: 1000,
+        autoform: {
+            rows: 5
+        }
     }
 }));
 

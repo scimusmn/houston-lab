@@ -24,14 +24,17 @@
         <div class="component">
           <h3>
 
-            <span id="text" data-type="text" data-field-name="componentNumber">
-              {{#if componentNumber}}
-                {{componentNumber}}
+            {{#if currentUser}}
+              <span id="text" data-type="text" data-field-name="componentNumber">
+                {{#if componentNumber}}
+                  {{componentNumber}}
                 {{else}}
-                ####
-              {{/if}}
-            </span>
-            -
+                  ####
+                {{/if}}
+              </span>
+              -
+            {{/if}}
+
             {{#if $.Session.equals 'currentLanguage' 'en'}}
 
               <span
@@ -55,7 +58,11 @@
             {{/if}}
 
           </h3>
-          <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBody">{{componentBody}}</p>
+          {{#if $.Session.equals 'currentLanguage' 'en'}}
+            <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBody">{{componentBody}}</p>
+          {{else}}
+            <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBodyEs">{{componentBodyEs}}</p>
+          {{/if}}
         </div>
       {{/with}}
 
