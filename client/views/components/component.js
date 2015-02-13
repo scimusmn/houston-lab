@@ -31,11 +31,10 @@ Template.component.events({
     },
     'click .edit-page-link': function(e) {
         e.preventDefault();
-        console.log('this - ', this);
+        Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },
     'click #start-over': function(e) {
         e.preventDefault();
         Router.go('components');
-        console.log('start over clicked');
     }
 });
