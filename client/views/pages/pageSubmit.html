@@ -6,6 +6,7 @@
       <legend>Add a Page</legend>
       {{> afQuickField autofocus='' value=componentNumberHelper name='componentNumber'}}
       {{> afQuickField value=parentLinkHelper name='parentLink'}}
+      {{> afQuickField name='link'}}
       {{> afQuickField name='order'}}
       {{> afQuickField name='title'}}
       {{> afQuickField name='titleEs'}}
@@ -13,6 +14,7 @@
       {{> afQuickField name='bodyEs'}}
     </fieldset>
     <button type="submit" class="btn btn-primary">Insert</button>
+
   {{/autoForm}}
 
 </template>

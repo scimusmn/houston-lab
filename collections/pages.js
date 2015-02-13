@@ -15,6 +15,11 @@ Pages.attachSchema(new SimpleSchema({
         label: 'Parent link',
         regEx: /^[.a-zA-Z0-9-]+$/
     },
+    link: {
+        type: String,
+        label: 'Link',
+        regEx: /^[.a-zA-Z0-9-]+$/
+    },
     order: {
         type: Number,
         label: 'Order'
