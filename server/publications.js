@@ -47,13 +47,13 @@ Meteor.publish('pages', function(componentNumber) {
     return result;
 });
 
-Meteor.publish('singlePage', function(componentNumber, componentLink) {
+Meteor.publish('singlePage', function(componentNumber, parentLink, link) {
     /**
      * Return any page with the URL ID
      * as well as any subpages with the same parentId
      */
     var page = Pages.find( { $and: [
-        {componentNumber: componentNumber, 'componentLink': componentLink }
+        {componentNumber: componentNumber, parentLink: parentLink, link: link }
     ]});
     return page;
 });
