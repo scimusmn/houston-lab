@@ -30,3 +30,12 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/**
+ * Forms
+ */
+.disabled {
+  cursor: not-allowed;
+  background-color: #EEE;
+  color: #9E9999;
+}
