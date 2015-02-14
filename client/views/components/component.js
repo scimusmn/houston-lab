@@ -41,7 +41,12 @@ Template.component.events({
         e.preventDefault();
         // Fix this to go to the correct edit page for this link
         console.log('this- ', this);
-        Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
+        Router.go('stepEdit', {
+            componentNumber: this.componentNumber,
+            parentLink: this.parentLink,
+            link: this.link
+        });
+        //Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },
     'click #start-over': function(e) {
         e.preventDefault();

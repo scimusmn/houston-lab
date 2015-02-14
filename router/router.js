@@ -166,17 +166,17 @@ Router.map(function() {
     });
 
     this.route('stepEdit', {
-        path: '/components/:componentNumber' + '-' + ':parentLink/:order/edit',
+        path: '/components/:componentNumber' + '-' + ':parentLink/:link/edit',
         waitOn: function () {
             return [
-                Meteor.subscribe('singleStep', this.params.componentNumber, this.params.parentLink, this.params.order)
+                Meteor.subscribe('singleStep', this.params.link)
             ];
         },
         onBeforeAction: function () {
             AccountsEntry.signInRequired(this);
         },
         data: function () {
-            var result = Steps.findOne( { $and: [ { componentNumber: this.params.componentNumber }, { parentLink: this.params.parentLink} ] });
+            var result = Steps.findOne( { link: this.params.link } );
             return result;
         }
     });

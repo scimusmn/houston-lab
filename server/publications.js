@@ -47,10 +47,11 @@ Meteor.publish('steps', function(componentNumber) {
     return result;
 });
 
-Meteor.publish('singleStep', function(componentNumber, parentLink, link) {
-    var step = Steps.find( { $and: [
-        {componentNumber: componentNumber, parentLink: parentLink, link: link }
-    ]});
+Meteor.publish('singleStep', function(link) {
+    var step = Steps.find( { link: link } );
+    //var step = Steps.find( { $and: [
+        //{componentNumber: componentNumber, parentLink: parentLink, link: link }
+    //]});
     return step;
 });
 
