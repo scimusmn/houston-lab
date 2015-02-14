@@ -166,23 +166,17 @@ Router.map(function() {
     });
 
     this.route('pageEdit', {
-        path: '/components/:componentNumber' + '-' + ':parentLink/:link/edit',
+        path: '/components/:componentNumber' + '-' + ':parentLink/:order/edit',
         waitOn: function () {
             return [
-                //Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
-                Meteor.subscribe('singlePage', this.params.componentNumber, this.params.parentLink, this.params.link)
+                Meteor.subscribe('singlePage', this.params.componentNumber, this.params.parentLink, this.params.order)
             ];
         },
         onBeforeAction: function () {
             AccountsEntry.signInRequired(this);
         },
         data: function () {
-            console.log('this.params.componentNumber - ', this.params.componentNumber);
-            console.log('this.params.parentLink - ', this.params.parentLink);
-            //var result = Pages.findOne( { $and: [ { componentNumber: this.params.componentNumber }, { componentLink: this.params.link } ] });
             var result = Pages.findOne( { $and: [ { componentNumber: this.params.componentNumber }, { parentLink: this.params.parentLink} ] });
-            //var result = Pages.findOne( {});
-            console.log('result - ', result);
             return result;
         }
     });
