@@ -20,10 +20,15 @@
     "Meteor": false,
     "Template": false,
     "Deps": false,
+    "Session": false,
     "Router": false,
     "Images": false,
     "Components": false,
+    "Steps": false,
     "Pages": false,
+    // Modules
+    "_s": false,
+    "URI": false,
     "dimsum": false
   }
 }
