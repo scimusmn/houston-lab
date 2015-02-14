@@ -15,7 +15,7 @@ Template.components.helpers({
     beforeRemove: function () {
         return function (collection, id) {
             var doc = collection.findOne(id);
-            if (confirm('Really delete "' + doc.name + '"?')) {
+            if (confirm('Really delete ' + doc.componentTitle + '?')) {
                 this.remove();
             }
         };

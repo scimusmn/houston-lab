@@ -5,10 +5,9 @@
       {{#if currentUser}}
         <div class="row">
           <div class="col-lg-6">
-            <div class="btn-group btn-group-lg btn-group-justified" role="group" >
               <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
-              <a href="#" id="delete-link" class="btn btn-danger">Delete</a>
-            </div>
+              {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
+
           </div>
           <div class="col-lg-6">
             Current language: {{currentLanguage}}<br>
@@ -67,10 +66,11 @@
       {{/with}}
 
       {{#each steps}}
-        <div class="animated fadeInLeft">
+        <div class="step animated fadeInLeft">
           {{order}} - {{title}} -
           {{#if currentUser}}
-            <a class="edit-step-link" href="#">edit</a>
+            <a class="edit-step-link btn btn-primary btn-xs" href="#">edit</a>
+            {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
           {{/if}}
         </div>
       {{/each}}

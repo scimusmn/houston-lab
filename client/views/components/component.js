@@ -17,6 +17,14 @@ Template.component.helpers({
          * Sort steps by order
          */
         return Steps.find({}, {sort: {order: 1}});
+    },
+    beforeRemove: function () {
+        return function (collection, id) {
+            var doc = collection.findOne(id);
+            if (confirm('Really delete ' + doc.title + '?')) {
+                this.remove();
+            }
+        };
     }
 });
 
