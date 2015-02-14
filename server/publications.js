@@ -37,25 +37,21 @@ Meteor.publish('singleComponent', function(componentNumber, componentLink) {
 });
 
 /**
- * Pages
+ * Steps
  */
-Meteor.publish('pages', function(componentNumber) {
-    var result = Pages.find(
+Meteor.publish('steps', function(componentNumber) {
+    var result = Steps.find(
         {componentNumber: componentNumber},
         {sort: {order: 1}}
     );
     return result;
 });
 
-Meteor.publish('singlePage', function(componentNumber, parentLink, link) {
-    /**
-     * Return any page with the URL ID
-     * as well as any subpages with the same parentId
-     */
-    var page = Pages.find( { $and: [
+Meteor.publish('singleStep', function(componentNumber, parentLink, link) {
+    var step = Steps.find( { $and: [
         {componentNumber: componentNumber, parentLink: parentLink, link: link }
     ]});
-    return page;
+    return step;
 });
 
 /**

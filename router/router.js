@@ -94,7 +94,7 @@ Router.map(function() {
             //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
             return [
                 Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.componentLink),
-                Meteor.subscribe('pages', this.params.componentNumber)
+                Meteor.subscribe('steps', this.params.componentNumber)
             ];
         },
         data: function () {
@@ -123,8 +123,8 @@ Router.map(function() {
             //var result = Components.findOne( { componentNumber: this.params.componentNumber } );
             return [
                 Meteor.subscribe('singleComponent', this.params.componentNumber, this.params.link),
-                //Meteor.subscribe('pages', {'componentNumber': result.componentNumber} )
-                Meteor.subscribe('pages', this.params.componentNumber)
+                //Meteor.subscribe('steps', {'componentNumber': result.componentNumber} )
+                Meteor.subscribe('steps', this.params.componentNumber)
             ];
         },
         onBeforeAction: function () {
@@ -138,18 +138,18 @@ Router.map(function() {
 
     /**
      **************************************************************************
-     * Pages
+     * Steps
      **************************************************************************
      */
 
     /**
-     * Each top level page in the component
+     * Each top level steps in the component
      */
-    this.route('page', {
-        path: '/components/:componentNumber/page/:link',
+    this.route('steps', {
+        path: '/components/:componentNumber/steps/:link',
         waitOn: function () {
             return [
-                Meteor.subscribe('singlePage', this.params.componentNumber, this.params.link )
+                Meteor.subscribe('singleStep', this.params.componentNumber, this.params.link )
             ];
         },
         //
@@ -160,32 +160,29 @@ Router.map(function() {
         data: function () {
             return {
                 //component: Components.findOne({componentNumber: this.params.componentNumber})
-                page: Pages.findOne({})
+                step: Steps.findOne({})
             };
         }
     });
 
-    this.route('pageEdit', {
+    this.route('stepEdit', {
         path: '/components/:componentNumber' + '-' + ':parentLink/:order/edit',
         waitOn: function () {
             return [
-                Meteor.subscribe('singlePage', this.params.componentNumber, this.params.parentLink, this.params.order)
+                Meteor.subscribe('singleStep', this.params.componentNumber, this.params.parentLink, this.params.order)
             ];
         },
         onBeforeAction: function () {
             AccountsEntry.signInRequired(this);
         },
         data: function () {
-            var result = Pages.findOne( { $and: [ { componentNumber: this.params.componentNumber }, { parentLink: this.params.parentLink} ] });
+            var result = Steps.findOne( { $and: [ { componentNumber: this.params.componentNumber }, { parentLink: this.params.parentLink} ] });
             return result;
         }
     });
 
-    /**
-     * Each top level page in the component
-     */
-    this.route('pageSubmit', {
-        path: '/pages/submit',
+    this.route('stepSubmit', {
+        path: '/steps/submit',
         onBeforeAction: function () {
             AccountsEntry.signInRequired(this);
         }

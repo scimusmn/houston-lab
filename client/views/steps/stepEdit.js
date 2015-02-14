@@ -1,12 +1,12 @@
-Template.pageEdit.rendered = function () {
+Template.stepEdit.rendered = function () {
     $('input[name="componentNumber"]').focus();
 };
 
-Template.pageEdit.events({
+Template.stepEdit.events({
     //
 });
 
-AutoForm.addHooks(['updatePagesForm'], {
+AutoForm.addHooks(['updateStepsForm'], {
     onSuccess: function(operation, result, template) {
         // Delete two of the tail segemnts from the current URL to get the
         // parent component URL

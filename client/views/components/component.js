@@ -12,11 +12,11 @@ Template.component.helpers({
     english: function() {
         return false;
     },
-    pages: function() {
+    steps: function() {
         /**
-         * Return only top level pages, no sub-pages (aka pages with defined parentIds)
+         * Sort steps by order
          */
-        return Pages.find({}, {sort: {order: 1}});
+        return Steps.find({}, {sort: {order: 1}});
     }
 });
 
@@ -29,7 +29,7 @@ Template.component.events({
         e.preventDefault();
         Router.go( Router.current().location.get().path + '/edit' );
     },
-    'click .edit-page-link': function(e) {
+    'click .edit-step-link': function(e) {
         e.preventDefault();
         Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },

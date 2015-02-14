@@ -1,7 +1,3 @@
-//Template.pageSubmit.rendered = function () {
-    //$('input[name="componentNumber"]').focus();
-//};
-
 function componentNumber() {
     return Router.current().params.query.componentNumber;
 }
@@ -10,14 +6,14 @@ function parentLink() {
     return Router.current().params.query.link;
 }
 
-Template.pageSubmit.rendered = function() {
+Template.stepSubmit.rendered = function() {
     //
 };
 
 /**
  * Populate field with URL parameters if passed
  */
-Template.pageSubmit.helpers({
+Template.stepSubmit.helpers({
     componentNumberHelper: function() {
         return componentNumber();
     },
@@ -26,11 +22,11 @@ Template.pageSubmit.helpers({
     }
 });
 
-Template.pageSubmit.events({
+Template.stepSubmit.events({
     //
 });
 
-AutoForm.addHooks(['insertPageForm'], {
+AutoForm.addHooks(['insertStepForm'], {
     onSuccess: function(operation, result, template) {
         if (componentNumber() && parentLink()) {
             Router.go('/components/' + componentNumber() + '-' + parentLink());

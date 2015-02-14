@@ -66,17 +66,16 @@
         </div>
       {{/with}}
 
-      {{#each pages}}
-        <!--<div class="animated fadeInLeft"><a href="{{pathFor 'page'}}"> {{order}} - {{title}} </a></div>-->
+      {{#each steps}}
         <div class="animated fadeInLeft">
           {{order}} - {{title}} -
           {{#if currentUser}}
-            <a class="edit-page-link" href="#">edit</a>
+            <a class="edit-step-link" href="#">edit</a>
           {{/if}}
         </div>
       {{/each}}
       {{#if currentUser}}
-        <a class="btn btn-primary" href="/pages/submit?componentNumber={{component.componentNumber}}&link={{component.componentLink}}">Add new page</a>
+        <a class="btn btn-primary" href="/steps/submit?componentNumber={{component.componentNumber}}&link={{component.componentLink}}">Add new step</a>
       {{/if}}
 
       <div class="navigation">

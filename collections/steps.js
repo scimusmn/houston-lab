@@ -1,10 +1,10 @@
 /**
- * Setup the Items collection
+ * Setup the Steps collection
  */
 
-Pages = new Meteor.Collection('pages');
+Steps = new Meteor.Collection('steps');
 
-Pages.attachSchema(new SimpleSchema({
+Steps.attachSchema(new SimpleSchema({
     componentNumber: {
         type: String,
         label: 'Component number',
@@ -40,7 +40,7 @@ Pages.attachSchema(new SimpleSchema({
 }));
 
 
-Pages.simpleSchema().messages({
+Steps.simpleSchema().messages({
     'regEx parentLink': [
         { msg: '[label]s can only include lowercase letters, numbers, and the - character.' },
     ]
@@ -49,7 +49,7 @@ Pages.simpleSchema().messages({
 /**
  * Allow posting if you're logged in
  */
-Pages.allow({
+Steps.allow({
     'insert': function (userId, doc) {
         return !! userId;
     },
