@@ -15,35 +15,22 @@ Pages.attachSchema(new SimpleSchema({
         label: 'Parent link',
         regEx: /^[.a-zA-Z0-9-]+$/
     },
-    link: {
-        type: String,
-        label: 'Link',
-        regEx: /^[.a-zA-Z0-9-]+$/
-    },
     order: {
         type: Number,
         label: 'Order'
     },
     title: {
         type: String,
-        label: 'Title'
-    },
-    titleEs: {
-        type: String,
-        label: 'Title - Spanish'
-    },
-    body: {
-        type: String,
-        label: 'Body',
+        label: 'Step',
         min: 4,
         max: 1000,
         autoform: {
             rows: 5
         }
     },
-    bodyEs: {
+    titleEs: {
         type: String,
-        label: 'Body - Spanish',
+        label: 'Step - Spanish',
         min: 4,
         max: 1000,
         autoform: {
