@@ -19,6 +19,20 @@ Steps.attachSchema(new SimpleSchema({
         type: Number,
         label: 'Order'
     },
+    link: {
+        type: String,
+        label: 'Link',
+        optional: true,
+        index: true,
+        unique: true,
+        autoValue: function() {
+            var componentNumber = this.field('componentNumber');
+            var order = this.field('order');
+            if (componentNumber.isSet && order.isSet) {
+                return componentNumber.value + '-' + _s.lpad(order.value, 4, '0');
+            }
+        }
+    },
     title: {
         type: String,
         label: 'Step',
