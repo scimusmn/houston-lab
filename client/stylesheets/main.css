@@ -27,10 +27,17 @@ body {
 /**
  * Steps
  */
-.step {
+.step-container {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.step {
+  opacity: 0;
+  -webkit-transform: translate3d(-3000px, 0, 0);
+  transform: translate3d(-3000px, 0, 0);
+}
+
 
 /**
  * Forms
