@@ -3,60 +3,54 @@
     <div class="col-lg-offset-2 col-lg-8">
 
       {{#if currentUser}}
-        <div class="row">
-          <div class="col-lg-6">
-              <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
-              {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
-
-          </div>
-          <div class="col-lg-6">
-            Current language: {{currentLanguage}}<br>
-            Current language: {{$.Session.get 'currentLanguage'}}<br>
-            Is it English? {{$.Session.equals 'currentLanguage' 'en'}}<br>
-            Is it Spanish? {{$.Session.equals 'currentLanguage' 'es'}}
-          </div>
-        </div>
-        <hr>
       {{/if}}
 
       {{#with component}}
         <div class="component">
-          <h3>
-
-            {{#if currentUser}}
-              <span id="text" data-type="text" data-field-name="componentNumber">
-                {{#if componentNumber}}
-                  {{componentNumber}}
-                {{else}}
-                  ####
+          <div class="row">
+            <div class="col-lg-8">
+              <h3>
+                {{#if currentUser}}
+                  <span id="text" data-type="text" data-field-name="componentNumber">
+                    {{#if componentNumber}}
+                      {{componentNumber}}
+                    {{else}}
+                      ####
+                    {{/if}}
+                  </span>
+                  -
                 {{/if}}
-              </span>
-              -
-            {{/if}}
 
-            {{#if $.Session.equals 'currentLanguage' 'en'}}
+                {{#if $.Session.equals 'currentLanguage' 'en'}}
 
-              <span
-                id="text" data-type="text" data-pk="{{_id}}"
-                data-value="{{componentTitle}}" data-context="Components"
-                data-field-name="{{componentTitle}}"
-              >
-                {{componentTitle}}
-              </span>
+                  <span
+                    id="text" data-type="text" data-pk="{{_id}}"
+                    data-value="{{componentTitle}}" data-context="Components"
+                    data-field-name="{{componentTitle}}"
+                  >
+                    {{componentTitle}}
+                  </span>
 
-            {{else}}
-
-              <span id="text" data-type="text" data-field-name="componentTitleEs">
-                {{#if componentTitleEs}}
-                  {{componentTitleEs}}
                 {{else}}
-                  ----
+
+                  <span id="text" data-type="text" data-field-name="componentTitleEs">
+                    {{#if componentTitleEs}}
+                      {{componentTitleEs}}
+                    {{else}}
+                      ----
+                    {{/if}}
+                  </span>
+
                 {{/if}}
-              </span>
+              </h3>
+            </div>
+            <div class="col-lg-4 component-edit-btns">
+              <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
+              {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
+            </div>
+          </div>
 
-            {{/if}}
-
-          </h3>
+          <hr>
           {{#if $.Session.equals 'currentLanguage' 'en'}}
             <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBody">{{componentBody}}</p>
           {{else}}
