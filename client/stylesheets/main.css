@@ -8,6 +8,7 @@ body {
 .container {
   max-width: 1024px;
   background: #FFF;
+  overflow: hidden;
 }
 
 /**
