@@ -39,6 +39,8 @@ Template.component.events({
     },
     'click .edit-step-link': function(e) {
         e.preventDefault();
+        // Fix this to go to the correct edit page for this link
+        console.log('this- ', this);
         Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },
     'click #start-over': function(e) {
