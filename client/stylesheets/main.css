@@ -19,6 +19,10 @@ body {
   padding-bottom: 20px;
 }
 
+.component-edit-btns {
+  margin-top: 20px;
+}
+
 /**
  * Steps
  */
