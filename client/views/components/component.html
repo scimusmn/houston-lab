@@ -51,12 +51,37 @@
           </div>
 
           <hr>
-          {{#if $.Session.equals 'currentLanguage' 'en'}}
-            <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBody">{{componentBody}}</p>
-          {{else}}
-            <p id="textArea" data-inputclass="ta-edit" data-type="textarea" data-field-name="componentBodyEs">{{componentBodyEs}}</p>
-          {{/if}}
-        </div>
+          <div class="row">
+
+            <!-- Body -->
+            <div class="col-lg-6">
+
+              <!-- Body - English -->
+              {{#if $.Session.equals 'currentLanguage' 'en'}}
+                <p id="textArea" data-inputclass="ta-edit"
+                  data-type="textarea"
+                  data-field-name="componentBody">
+                  {{componentBody}}
+                </p>
+
+              <!-- Body - Spanish -->
+              {{else}}
+                <p id="textArea" data-inputclass="ta-edit"
+                  data-type="textarea" data-field-name="componentBodyEs">
+                  {{componentBodyEs}}
+                </p>
+              {{/if}}
+
+            </div>
+
+            <!-- Video -->
+            <div class="col-lg-6">
+              This is where the video goes
+            </div>
+
+          </div><!-- /row -->
+
+        </div><!-- /component -->
       {{/with}}
 
       <hr>
@@ -104,5 +129,10 @@
      - <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
     {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
   {{/if}}
+
+  <!--Audio-->
+
+
+
 </template>
 
