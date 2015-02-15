@@ -27,19 +27,43 @@ Template.component.helpers({
         };
     },
     sessionUpdate: function () {
-        if (Session.get('currentOrder')) {
-            return Session.get('currentOrder');
-        }
-        else {
-            Session.set('currentOrder', 0);
-            return 0;
-        }
+        return Session.get('currentOrder');
     },
 
 });
 
 Template.component.rendered = function () {
-    //
+    /**
+     * Ignore the session if you come to the page without a hash link
+     */
+    var path = Router.current().location.get().originalUrl;
+    var uri = new URI(path);
+    var hash = uri.hash();
+    if (hash) {
+        Session.set('currentOrder', _s.toNumber(_s.strRight(hash, '-')));
+    }
+    else {
+        Session.set('currentOrder', 0);
+    }
+
+    /**
+     * Animate the page elements in based on the session value
+     */
+    var currentOrder = Session.get('currentOrder');
+    console.log('currentOrder - ', currentOrder);
+    var range = _.range(1, (currentOrder + 1));
+    console.log('range - ', range);
+    _.each(range, function(i) {
+        $('div[data-order=' + i + '] div').
+            removeClass().
+            addClass('animated bounceInLeft');
+    });
+        //console.log('one')
+    //);
+        //$('div[data-order=' + currentOrder + '] div').
+            //removeClass().
+            //addClass('animated bounceInLeft')
+    //);
 };
 
 Template.component.events({
@@ -119,12 +143,7 @@ Template.component.events({
         uri.hash(nextOrderHash);
         Router.go(uri.href());
 
-        // Set the animation classes for the steps
-        //
-        // Which element do I need to change?
-        //
-        // Check the currentOrder
-
+        // Animate the step in
         $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInLeft');
 
     }
