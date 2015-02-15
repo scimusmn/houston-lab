@@ -27,7 +27,13 @@ Template.component.helpers({
         };
     },
     sessionUpdate: function () {
-        return Session.get('specialValue');
+        if (Session.get('currentOrder')) {
+            return Session.get('currentOrder');
+        }
+        else {
+            Session.set('currentOrder', 0);
+            return 0;
+        }
     }
 });
 
@@ -56,29 +62,28 @@ Template.component.events({
         Router.go('components');
     },
     'click #forward': function(e) {
-        console.log('this - ', this);
         e.preventDefault();
 
-        // TODO
-        // Use the hash on both sides of this, while still setting the hash
-        // for bookmarking
-        var path = Router.current().location.get().originalUrl;
-
-        var uri = new URI(path);
-        var hash = uri.hash();
-        var stepNum;
-        if (hash) {
-            console.log('hash - ', hash);
-            stepNum = _s.toNumber(_s.strRight(hash, '-'));
+        var currentOrder;
+        if (Session.get('currentOrder')) {
+            currentOrder = Session.get('currentOrder');
         }
         else {
-            stepNum = 0;
+            currentOrder = 0;
         }
-        var nextStepNum = (stepNum + 1);
-        var nextStepHash = 'step-' + _s.lpad(nextStepNum, 4, '0');
-        Session.set('specialValue', nextStepNum);
+        console.log('currentOrder - ', currentOrder);
 
-        uri.hash(nextStepHash);
+        // Set the session for reactions in the template
+        var nextOrder = (currentOrder + 1);
+        console.log('nextOrder - ', nextOrder);
+        Session.set('currentOrder', nextOrder);
+
+        // Set the URL with a hash to track our step progress
+        var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
+        var path = Router.current().location.get().originalUrl;
+        var uri = new URI(path);
+        var hash = uri.hash();
+        uri.hash(nextOrderHash);
         Router.go(uri.href());
 
     }
