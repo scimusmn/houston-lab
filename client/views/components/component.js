@@ -66,20 +66,23 @@ Template.component.events({
             componentNumber: this.component.componentNumber,
             componentLink: this.component.componentLink
         });
+        $('div.step-container div.bounceInLeft').removeClass().addClass('animated bounceOutLeft');
     },
     'click #back': function(e) {
         e.preventDefault();
 
         var currentOrder;
+        var nextOrder;
         if (Session.get('currentOrder')) {
             currentOrder = Session.get('currentOrder');
+            nextOrder = (currentOrder - 1);
         }
         else {
             currentOrder = 0;
+            nextOrder = 0;
         }
 
         // Set the session for reactions in the template
-        var nextOrder = (currentOrder - 1);
         Session.set('currentOrder', nextOrder);
 
         // Set the URL with a hash to track our step progress
@@ -122,9 +125,7 @@ Template.component.events({
         //
         // Check the currentOrder
 
-        $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-            $(this).removeClass();
-        });
+        $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInLeft');
 
     }
 });
