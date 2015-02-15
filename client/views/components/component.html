@@ -62,31 +62,17 @@
       <hr>
       <h3>Session test</h3>
       {{#if sessionUpdate}}
-        {{sessionUpdate}}
+        Current order - {{sessionUpdate}}
       {{else}}
         There is no session value
       {{/if}}
       <hr>
 
       {{#each steps}}
-        <div id="step-{{link}}" class="step-container">
-          {{#if $gte sessionUpdate order}}
-            <div data-link="{{link}}" class="animated bounceInLeft">
-              {{order}} - {{title}} -
-              {{#if currentUser}}
-                <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
-                {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
-              {{/if}}
-            </div>
-          {{else}}
-            <div data-link="{{link}}" class="step">
-              {{order}} - {{title}} -
-              {{#if currentUser}}
-                <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
-                {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
-              {{/if}}
-            </div>
-          {{/if}}
+        <div id="step-{{link}}" data-order="{{order}}" class="step-container">
+          <div data-link="{{link}}" class="step">
+            {{> step}}
+          </div>
         </div>
       {{/each}}
 
@@ -105,3 +91,13 @@
     </div>
   </div>
 </template>
+
+
+<template name="step">
+  {{order}} - {{title}} -
+  {{#if currentUser}}
+    <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
+    {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
+  {{/if}}
+</template>
+

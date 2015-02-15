@@ -34,7 +34,8 @@ Template.component.helpers({
             Session.set('currentOrder', 0);
             return 0;
         }
-    }
+    },
+
 });
 
 Template.component.rendered = function () {
@@ -58,8 +59,39 @@ Template.component.events({
         //Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },
     'click #start-over': function(e) {
+        console.log('this- ', this);
         e.preventDefault();
-        Router.go('components');
+        Session.set('currentOrder', 0);
+        Router.go('component', {
+            componentNumber: this.component.componentNumber,
+            componentLink: this.component.componentLink
+        });
+    },
+    'click #back': function(e) {
+        e.preventDefault();
+
+        var currentOrder;
+        if (Session.get('currentOrder')) {
+            currentOrder = Session.get('currentOrder');
+        }
+        else {
+            currentOrder = 0;
+        }
+
+        // Set the session for reactions in the template
+        var nextOrder = (currentOrder - 1);
+        Session.set('currentOrder', nextOrder);
+
+        // Set the URL with a hash to track our step progress
+        var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
+        var path = Router.current().location.get().originalUrl;
+        var uri = new URI(path);
+        var hash = uri.hash();
+        uri.hash(nextOrderHash);
+        Router.go(uri.href());
+
+        $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutLeft');
+
     },
     'click #forward': function(e) {
         e.preventDefault();
@@ -71,11 +103,9 @@ Template.component.events({
         else {
             currentOrder = 0;
         }
-        console.log('currentOrder - ', currentOrder);
 
         // Set the session for reactions in the template
         var nextOrder = (currentOrder + 1);
-        console.log('nextOrder - ', nextOrder);
         Session.set('currentOrder', nextOrder);
 
         // Set the URL with a hash to track our step progress
@@ -85,6 +115,16 @@ Template.component.events({
         var hash = uri.hash();
         uri.hash(nextOrderHash);
         Router.go(uri.href());
+
+        // Set the animation classes for the steps
+        //
+        // Which element do I need to change?
+        //
+        // Check the currentOrder
+
+        $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass();
+        });
 
     }
 });
