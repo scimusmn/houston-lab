@@ -94,7 +94,12 @@
 
 
 <template name="step">
-  {{order}} - {{title}}
+  {{order}} -
+  {{#if $.Session.equals 'currentLanguage' 'en'}}
+    {{title}}
+  {{else}}
+    {{titleEs}}
+  {{/if}}
   {{#if currentUser}}
      - <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
     {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
