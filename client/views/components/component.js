@@ -58,12 +58,6 @@ Template.component.rendered = function () {
             removeClass().
             addClass('animated bounceInLeft');
     });
-        //console.log('one')
-    //);
-        //$('div[data-order=' + currentOrder + '] div').
-            //removeClass().
-            //addClass('animated bounceInLeft')
-    //);
 };
 
 Template.component.events({
