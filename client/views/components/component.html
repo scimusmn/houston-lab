@@ -51,59 +51,63 @@
           </div>
 
           <hr>
+
           <div class="row">
 
-            <!-- Body -->
-            <div class="col-lg-6">
+            {{#if currentOrder}}
 
-              <!-- Body - English -->
-              {{#if $.Session.equals 'currentLanguage' 'en'}}
-                <p id="textArea" data-inputclass="ta-edit"
-                  data-type="textarea"
-                  data-field-name="componentBody">
-                  {{componentBody}}
-                </p>
+              <!-- Video -->
+              <div class="col-lg-6">
+                <video id="objth" class="video-js vjs-default-skin" controls preload="auto" width="320" height="240" data-setup="{}">
+                  <source src="/video/0001-getSlide-v02.mp4" type='video/mp4' />
+                </video>
+              </div>
 
-              <!-- Body - Spanish -->
-              {{else}}
-                <p id="textArea" data-inputclass="ta-edit"
-                  data-type="textarea" data-field-name="componentBodyEs">
-                  {{componentBodyEs}}
-                </p>
-              {{/if}}
+              <!-- Steps -->
+              <div class="col-lg-6">
+                Steps:
+                {{#each steps}}
+                  <div id="step-{{link}}" data-order="{{order}}" class="step-container">
+                    <div data-link="{{link}}" class="step">
+                      {{> step}}
+                    </div>
+                  </div>
+                {{/each}}
 
-            </div>
+                {{#if currentUser}}
+                  <a class="btn btn-primary" href="/steps/submit?componentNumber={{component.componentNumber}}&link={{component.componentLink}}">Add new step</a>
+                {{/if}}
+              </div>
 
-            <!-- Video -->
-            <div class="col-lg-6">
-              This is where the video goes
-            </div>
+            {{else}}
+
+              <!-- Body -->
+              <div class="col-lg-offset-2 col-lg-8">
+
+                <!-- Body - English -->
+                {{#if $.Session.equals 'currentLanguage' 'en'}}
+                  <p id="textArea" data-inputclass="ta-edit"
+                    data-type="textarea"
+                    data-field-name="componentBody">
+                    {{componentBody}}
+                  </p>
+
+                <!-- Body - Spanish -->
+                {{else}}
+                  <p id="textArea" data-inputclass="ta-edit"
+                    data-type="textarea" data-field-name="componentBodyEs">
+                    {{componentBodyEs}}
+                  </p>
+                {{/if}}
+
+              </div>
+
+            {{/if}}
 
           </div><!-- /row -->
 
         </div><!-- /component -->
       {{/with}}
-
-      <hr>
-      <h3>Session test</h3>
-      {{#if sessionUpdate}}
-        Current order - {{sessionUpdate}}
-      {{else}}
-        There is no session value
-      {{/if}}
-      <hr>
-
-      {{#each steps}}
-        <div id="step-{{link}}" data-order="{{order}}" class="step-container">
-          <div data-link="{{link}}" class="step">
-            {{> step}}
-          </div>
-        </div>
-      {{/each}}
-
-      {{#if currentUser}}
-        <a class="btn btn-primary" href="/steps/submit?componentNumber={{component.componentNumber}}&link={{component.componentLink}}">Add new step</a>
-      {{/if}}
 
       <div class="navigation">
         <div class="btn-group btn-group-lg btn-group-justified" role="group" >
@@ -112,6 +116,17 @@
           <a href="#" id="forward" class="btn btn-default">Forward</a>
         </div>
       </div>
+
+      <hr>
+      <h3>Session test</h3>
+      {{#if currentOrder}}
+        Current order - {{currentOrder}}
+      {{else}}
+        Current order - 0
+      {{/if}}
+      <hr>
+
+
 
     </div>
   </div>

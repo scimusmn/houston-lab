@@ -26,7 +26,7 @@ Template.component.helpers({
             }
         };
     },
-    sessionUpdate: function () {
+    currentOrder: function () {
         return Session.get('currentOrder');
     },
 
@@ -56,7 +56,7 @@ Template.component.rendered = function () {
     _.each(range, function(i) {
         $('div[data-order=' + i + '] div').
             removeClass().
-            addClass('animated bounceInLeft');
+            addClass('animated bounceInRight');
     });
 };
 
@@ -84,7 +84,7 @@ Template.component.events({
             componentNumber: this.component.componentNumber,
             componentLink: this.component.componentLink
         });
-        $('div.step-container div.bounceInLeft').removeClass().addClass('animated bounceOutLeft');
+        $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
     },
     'click #back': function(e) {
         e.preventDefault();
@@ -111,7 +111,7 @@ Template.component.events({
         uri.hash(nextOrderHash);
         Router.go(uri.href());
 
-        $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutLeft');
+        $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
 
     },
     'click #forward': function(e) {
@@ -137,8 +137,23 @@ Template.component.events({
         uri.hash(nextOrderHash);
         Router.go(uri.href());
 
+        //
         // Animate the step in
-        $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInLeft');
+        //
+        // Wait for a short bit so that the DOM element will be there.
+        // We need to do this for the switch from the first body section
+        // where the step divs haven't loaded yet.
+        //
+        var timeout;
+        if (currentOrder === 0) {
+            timeout = 50;
+        }
+        else {
+            timeout = 0;
+        }
+        setTimeout(function(){
+            $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInRight');
+        }, timeout);
 
     }
 });
