@@ -130,7 +130,8 @@ Template.component.events({
         Session.set('currentOrder', nextOrder);
 
         // Set the URL with a hash to track our step progress
-        var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
+        var nextOrderPad = _s.lpad(nextOrder, 4, '0');
+        var nextOrderHash = 'step-' + nextOrderPad;
         var path = Router.current().location.get().originalUrl;
         var uri = new URI(path);
         var hash = uri.hash();
@@ -138,7 +139,7 @@ Template.component.events({
         Router.go(uri.href());
 
         //
-        // Animate the step in
+        // Load the next step
         //
         // Wait for a short bit so that the DOM element will be there.
         // We need to do this for the switch from the first body section
@@ -146,13 +147,30 @@ Template.component.events({
         //
         var timeout;
         if (currentOrder === 0) {
-            timeout = 100;
+            timeout = 500;
         }
         else {
             timeout = 0;
         }
+
+        // Current step link
+        var link = this.component.componentNumber + '-' + nextOrderPad;
+
         setTimeout(function(){
+            //
+            // Switch video
+            //
+            var videoPath = '/video/' + link + '.mp4';
+            var video = $('video#stepVideo')[0];
+            video.src = videoPath;
+            video.load();
+            video.play();
+
+            //
+            // Animate in step text
+            //
             $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInRight');
+
         }, timeout);
 
     }
