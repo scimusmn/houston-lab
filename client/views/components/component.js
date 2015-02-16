@@ -146,7 +146,7 @@ Template.component.events({
         //
         var timeout;
         if (currentOrder === 0) {
-            timeout = 50;
+            timeout = 100;
         }
         else {
             timeout = 0;
