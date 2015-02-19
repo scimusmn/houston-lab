@@ -50,14 +50,19 @@ Template.component.rendered = function () {
      * Animate the page elements in based on the session value
      */
     var currentOrder = Session.get('currentOrder');
-    console.log('currentOrder - ', currentOrder);
     var range = _.range(1, (currentOrder + 1));
-    console.log('range - ', range);
     _.each(range, function(i) {
         $('div[data-order=' + i + '] div').
             removeClass().
             addClass('animated bounceInRight');
     });
+    var body = $('div[data-field-name="componentBody"]');
+    //var audioPath = '/audio/' + link + '.mp3';
+    if(!this._rendered) {
+        this._rendered = true;
+        console.log('Template onLoad');
+    }
+
 };
 
 Template.component.events({
@@ -85,6 +90,13 @@ Template.component.events({
             componentLink: this.component.componentLink
         });
         $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
+
+        console.log('Starting bodyAudio');
+        setTimeout(function(){
+            var audio = $('audio#bodyAudio')[0];
+            audio.load();
+            audio.play();
+        }, 500);
     },
     'click #back': function(e) {
         e.preventDefault();
@@ -114,7 +126,7 @@ Template.component.events({
         $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
 
     },
-    'click #forward': function(e) {
+    'click #forward, click #begin': function(e) {
         e.preventDefault();
 
         var currentOrder;
@@ -168,6 +180,7 @@ Template.component.events({
 
             var audioPath = '/audio/' + link + '.mp3';
             var audio = $('audio#stepAudio')[0];
+            console.log('audio - ', audio);
             audio.src = audioPath;
             audio.load();
             audio.play();

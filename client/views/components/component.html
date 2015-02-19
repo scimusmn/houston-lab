@@ -1,6 +1,6 @@
 <template name="component">
   <div class="row">
-    <div class="col-lg-offset-2 col-lg-8">
+    <div class="col-md-offset-1 col-md-10">
 
       {{#if currentUser}}
       {{/if}}
@@ -8,7 +8,7 @@
       {{#with component}}
         <div class="component">
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col-md-8">
               <h3>
                 {{#if currentUser}}
                   <span id="text" data-type="text" data-field-name="componentNumber">
@@ -44,7 +44,7 @@
                 {{/if}}
               </h3>
             </div>
-            <div class="col-lg-4 component-edit-btns">
+            <div class="col-md-4 component-edit-btns">
               <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
               {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
             </div>
@@ -57,21 +57,19 @@
             {{#if currentOrder}}
 
               <!-- Video -->
-              <div class="col-lg-6">
+              <div class="col-md-5">
                 <video id="stepVideo" class="video-js vjs-default-skin" controls preload="auto" width="320" height="240" data-setup="{}">
                   <source src="#" type='video/mp4' />
                 </video>
               </div>
 
-              <!-- Audio -->
+              <!-- Step Audio -->
               <audio id="stepAudio">
                 <source src="#" type="audio/mpeg">
-                Your browser does not support the audio element.
               </audio>
 
               <!-- Steps -->
-              <div class="col-lg-6">
-                Steps:
+              <div class="col-md-7 steps">
                 {{#each steps}}
                   <div id="step-{{link}}" data-order="{{order}}" class="step-container">
                     <div data-link="{{link}}" class="step">
@@ -88,8 +86,12 @@
             {{else}}
 
               <!-- Body -->
-              <div class="col-lg-offset-2 col-lg-8">
+              <div class="col-md-offset-2 col-md-8">
 
+                <audio id="bodyAudio">
+                  <source src="/audio/0101/intro.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
                 <!-- Body - English -->
                 {{#if $.Session.equals 'currentLanguage' 'en'}}
                   <p id="textArea" data-inputclass="ta-edit"
@@ -106,6 +108,8 @@
                   </p>
                 {{/if}}
 
+              <!-- Body Audio -->
+
               </div>
 
             {{/if}}
@@ -116,11 +120,21 @@
       {{/with}}
 
       <div class="navigation">
-        <div class="btn-group btn-group-lg btn-group-justified" role="group" >
-          <a href="#" id="start-over" class="btn btn-default start-over">Start over</a>
-          <a href="#" id="back" class="btn btn-default">Back</a>
-          <a href="#" id="forward" class="btn btn-default">Forward</a>
-        </div>
+        {{#if currentOrder}}
+          <div class="btn-group btn-group-lg btn-group-justified" role="group" >
+            <a href="#" id="start-over" class="btn btn-default start-over">Start over</a>
+            <a href="#" id="back" class="btn btn-default">Back</a>
+            <a href="#" id="forward" class="btn btn-default">Forward</a>
+          </div>
+        {{else}}
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <div class="btn-group btn-group-lg btn-group-justified" role="group" >
+                <a href="#" id="begin" class="btn btn-default">Begin</a>
+              </div>
+            </div>
+          </div>
+        {{/if}}
       </div>
 
       <hr>
@@ -150,10 +164,6 @@
      - <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
     {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
   {{/if}}
-
-  <!--Audio-->
-
-
 
 </template>
 
