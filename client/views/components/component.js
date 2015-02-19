@@ -154,7 +154,7 @@ Template.component.events({
         }
 
         // Current step link
-        var link = this.component.componentNumber + '-' + nextOrderPad;
+        var link = this.component.componentNumber + '/' + nextOrderPad;
 
         setTimeout(function(){
             //
@@ -165,6 +165,12 @@ Template.component.events({
             video.src = videoPath;
             video.load();
             video.play();
+
+            var audioPath = '/audio/' + link + '.mp3';
+            var audio = $('audio#stepAudio')[0];
+            audio.src = audioPath;
+            audio.load();
+            audio.play();
 
             //
             // Animate in step text
