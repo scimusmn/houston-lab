@@ -1,5 +1,18 @@
 <template name="componentSubmit">
 
-  {{> quickForm collection="Components" id="insertComponentsForm" type="insert" template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10"}}
+  {{#autoForm collection="Components" doc=this id="insertComponentsForm" type="insert" template="bootstrap3-horizontal" label-class="col-md-2" input-col-class="col-md-10"}}
+
+    <fieldset>
+      <legend>Add a component</legend>
+      {{> afQuickField autofocus='' name='componentNumber'}}
+      {{> afQuickField name='componentTitle'}}
+      {{> afQuickField name='componentTitleEs'}}
+      {{> afQuickField name='componentLink'}}
+      {{> afQuickField name='componentBody'}}
+      {{> afQuickField name='componentBodyEs'}}
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  {{/autoForm}}
 
 </template>
