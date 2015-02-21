@@ -29,6 +29,10 @@ Template.component.helpers({
     currentOrder: function () {
         return Session.get('currentOrder');
     },
+    currentOrderPad: function () {
+        var currentOrder = Session.get('currentOrder');
+        return _s.lpad(currentOrder, 4, '0');
+    }
 
 });
 
@@ -101,6 +105,11 @@ Template.component.events({
     'click #back': function(e) {
         e.preventDefault();
 
+        // Stop the current step audio
+        var audio = $('audio#stepAudio')[0];
+        audio.pause();
+        audio.currentTime = 0;
+
         var currentOrder;
         var nextOrder;
         if (Session.get('currentOrder')) {
@@ -124,6 +133,13 @@ Template.component.events({
         Router.go(uri.href());
 
         $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
+
+        console.log('Starting previous slide\'s audio');
+        //setTimeout(function(){
+            //var audio = $('audio#bodyAudio')[0];
+            //audio.load();
+            //audio.play();
+        //}, 500);
 
     },
     'click #forward, click #begin': function(e) {
@@ -174,14 +190,13 @@ Template.component.events({
             //
             var videoPath = '/video/' + link + '.mp4';
             var video = $('video#stepVideo')[0];
-            video.src = videoPath;
+            //video.src = videoPath;
             video.load();
             video.play();
 
-            var audioPath = '/audio/' + link + '.mp3';
+            // Load the audio element again.
+            // The source is changed in the template.
             var audio = $('audio#stepAudio')[0];
-            console.log('audio - ', audio);
-            audio.src = audioPath;
             audio.load();
             audio.play();
 

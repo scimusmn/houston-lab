@@ -44,10 +44,12 @@
                 {{/if}}
               </h3>
             </div>
-            <div class="col-md-4 component-edit-btns">
-              <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
-              {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
-            </div>
+            {{#if currentUser}}
+              <div class="col-md-4 component-edit-btns">
+                <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
+                {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
+              </div>
+            {{/if}}
           </div>
 
           <hr>
@@ -59,13 +61,13 @@
               <!-- Video -->
               <div class="col-md-5">
                 <video id="stepVideo" class="video-js vjs-default-skin" controls preload="auto" width="320" height="240" data-setup="{}">
-                  <source src="#" type='video/mp4' />
+                  <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4" type='video/mp4' />
                 </video>
               </div>
 
               <!-- Step Audio -->
-              <audio id="stepAudio">
-                <source src="#" type="audio/mpeg">
+              <audio controls id="stepAudio">
+                <source src="/audio/{{componentNumber}}/{{currentOrderPad}}.mp3" type="audio/mpeg">
               </audio>
 
               <!-- Steps -->
@@ -89,7 +91,7 @@
               <div class="col-md-offset-2 col-md-8">
 
                 <audio id="bodyAudio">
-                  <source src="/audio/0101/intro.mp3" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/intro.mp3" type="audio/mpeg">
                   Your browser does not support the audio element.
                 </audio>
                 <!-- Body - English -->
