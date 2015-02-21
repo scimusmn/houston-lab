@@ -9,6 +9,9 @@ body {
   max-width: 1024px;
   background: #FFF;
   overflow: hidden;
+  -webkit-box-shadow: 0px 5px 56px -14px rgba(0,0,0,0.51);
+-moz-box-shadow: 0px 5px 56px -14px rgba(0,0,0,0.51);
+box-shadow: 0px 5px 56px -14px rgba(0,0,0,0.51);
 }
 
 h1, h2, h3, h4, h5, h6 {
