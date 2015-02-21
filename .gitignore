@@ -1,3 +1,4 @@
 public/video/*/*.mp4
 public/video/*/*.mov
 public/audio/*/*.mp3
+dump/meteor/users*
