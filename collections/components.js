@@ -27,7 +27,7 @@ Components.attachSchema(new SimpleSchema({
         type: String,
         label: 'Body',
         min: 20,
-        max: 1000,
+        max: 10000,
         autoform: {
             rows: 5
         }
