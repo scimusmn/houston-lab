@@ -3,7 +3,16 @@
 A Meteor JS project for the Houston Health Museum
 
 ## Install
-`brew install mongo`
+
+### Get Meteor
+
+    curl https://install.meteor.com/ | sh
+
+### Populate Mongodb with the content
+
+    cd ~/Desktop/source/
+    brew install mongo
+    ./restore.sh
 
 ### Get media
 
