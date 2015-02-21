@@ -17,4 +17,4 @@ A Meteor JS project for the Houston Health Museum
 ### Get media
 
     cd ~/Desktop/source/public
-    rsync -rtDv --size-only --progress server:houston/public/ ./
+    rsync -rtDv --size-only --progress username@server:houston/public/ ./
