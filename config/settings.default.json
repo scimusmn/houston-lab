@@ -1,0 +1,11 @@
+{
+    "public": {
+        "homeItem": "torrey-pines",
+        "ga": {
+            "id": "UA-YY-X",
+            "create": {
+                "cookieDomain": "none"
+            }
+        }
+    }
+}
