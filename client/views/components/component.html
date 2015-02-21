@@ -88,7 +88,7 @@
             {{else}}
 
               <!-- Body -->
-              <div class="col-md-offset-2 col-md-8">
+              <div class="col-md-offset-1 col-md-10">
 
                 <audio id="bodyAudio">
                   <source src="/audio/{{componentNumber}}/intro.mp3" type="audio/mpeg">
@@ -96,18 +96,15 @@
                 </audio>
                 <!-- Body - English -->
                 {{#if $.Session.equals 'currentLanguage' 'en'}}
-                  <p id="textArea" data-inputclass="ta-edit"
-                    data-type="textarea"
-                    data-field-name="componentBody">
+                  <pre class="copy">
                     {{componentBody}}
-                  </p>
+                  </pre>
 
                 <!-- Body - Spanish -->
                 {{else}}
-                  <p id="textArea" data-inputclass="ta-edit"
-                    data-type="textarea" data-field-name="componentBodyEs">
+                  <pre class="copy">
                     {{componentBodyEs}}
-                  </p>
+                  </pre>
                 {{/if}}
 
               <!-- Body Audio -->
