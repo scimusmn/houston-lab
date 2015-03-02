@@ -72,16 +72,31 @@ pre.copy {
   margin-bottom: 10px;
 }
 
-/* Starting point */
+/* Animation starting point */
 .step {
   opacity: 0;
   -webkit-transform: translate3d(-3000px, 0, 0);
   transform: translate3d(-3000px, 0, 0);
 }
 
-/* animation setting */
 .step-container div {
   -webkit-animation-duration: .4s;
+  padding: 10px;
+  border: 0px solid #eee;
+  border-left-color: #FAFAFA;
+  border-left-width: 10px;
+  border-radius: 3px;
+  background: #FAFAFA;
+  color: #CCC;
+}
+
+div.step-active {
+  border: 0px solid #eee;
+  border-left-color: #777;
+  border-left-width: 10px;
+  border-radius: 3px;
+  background: #EAEAEA;
+  color: #333;
 }
 
 

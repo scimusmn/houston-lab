@@ -135,13 +135,14 @@ Template.component.events({
         Router.go(uri.href());
 
         $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
+        $('div[data-order=' + nextOrder + '] div').removeClass().addClass('step-active');
 
         console.log('Starting previous slide\'s audio');
-        //setTimeout(function(){
+        setTimeout(function(){
             //var audio = $('audio#bodyAudio')[0];
-            //audio.load();
-            //audio.play();
-        //}, 500);
+            audio.load();
+            audio.play();
+        }, 500);
 
     },
     'click #forward, click #begin': function(e) {
@@ -205,7 +206,8 @@ Template.component.events({
             //
             // Animate in step text
             //
-            $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInRight');
+            $('div.step-container div').removeClass('step-active');
+            $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInRight step-active');
 
         }, timeout);
 

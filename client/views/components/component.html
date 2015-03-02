@@ -63,12 +63,13 @@
                 <video id="stepVideo" class="video-js vjs-default-skin" controls preload="auto" width="320" height="240" data-setup="{}">
                   <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4" type='video/mp4' />
                 </video>
+
+                <!-- Step Audio -->
+                <audio id="stepAudio">
+                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}.mp3" type="audio/mpeg">
+                </audio>
               </div>
 
-              <!-- Step Audio -->
-              <audio id="stepAudio">
-                <source src="/audio/{{componentNumber}}/{{currentOrderPad}}.mp3" type="audio/mpeg">
-              </audio>
 
               <!-- Steps -->
               <div class="col-md-7 steps">
