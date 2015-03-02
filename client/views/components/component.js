@@ -61,19 +61,12 @@ Template.component.rendered = function () {
             addClass('animated bounceInRight');
     });
     var body = $('div[data-field-name="componentBody"]');
-    //var audioPath = '/audio/' + link + '.mp3';
 
-    console.log('Starting bodyAudio');
     setTimeout(function(){
         var audio = $('audio#bodyAudio')[0];
         audio.load();
         audio.play();
     }, 500);
-
-    if(!this._rendered) {
-        this._rendered = true;
-        console.log('Template onLoad');
-    }
 
 };
 
@@ -104,7 +97,6 @@ Template.component.events({
         });
         $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
 
-        console.log('Starting bodyAudio');
         setTimeout(function(){
             var audio = $('audio#bodyAudio')[0];
             audio.load();
