@@ -62,6 +62,14 @@ Template.component.rendered = function () {
     });
     var body = $('div[data-field-name="componentBody"]');
     //var audioPath = '/audio/' + link + '.mp3';
+
+    console.log('Starting bodyAudio');
+    setTimeout(function(){
+        var audio = $('audio#bodyAudio')[0];
+        audio.load();
+        audio.play();
+    }, 500);
+
     if(!this._rendered) {
         this._rendered = true;
         console.log('Template onLoad');
@@ -85,6 +93,7 @@ Template.component.events({
         });
         //Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },
+
     'click #start-over': function(e) {
         console.log('this- ', this);
         e.preventDefault();
@@ -102,6 +111,7 @@ Template.component.events({
             audio.play();
         }, 500);
     },
+
     'click #back': function(e) {
         e.preventDefault();
 
