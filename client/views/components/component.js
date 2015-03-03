@@ -206,6 +206,7 @@ Template.component.events({
         }, timeout);
 
     }
+
 });
 
 function playAudio(id) {

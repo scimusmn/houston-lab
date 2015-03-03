@@ -21,6 +21,18 @@ Template.layout.events({
             $('.es-switch').addClass('active');
         }
 
+        /**
+         * Stop current audio, wait for language switch in the template,
+         * and then play new language file.
+         */
+        var audio = $('audio')[0];
+        audio.pause();
+        audio.currentTime = 0;
+        setTimeout(function(){
+            audio.load();
+            audio.play();
+        }, 500);
+
         //// Retrieve the unique ID of the player that's been clicked
         //var playerId = this._id;
 
