@@ -60,12 +60,12 @@ Template.component.rendered = function () {
             removeClass().
             addClass('animated bounceInRight');
     });
-    var body = $('div[data-field-name="componentBody"]');
 
+    /**
+     * Play body audio on component home page
+     */
     setTimeout(function(){
-        var audio = $('audio#bodyAudio')[0];
-        audio.load();
-        audio.play();
+        playAudio('bodyAudio');
     }, 500);
 
 };
@@ -213,3 +213,13 @@ Template.component.events({
 
     }
 });
+
+function playAudio(id) {
+    var audio = getAudio(id);
+    audio.load();
+    audio.play();
+}
+
+function getAudio(id) {
+    return $('audio#' + id)[0];
+}
