@@ -120,11 +120,41 @@
       <div class="navigation">
         {{#if currentOrder}}
           <div class="btn-group btn-group-lg btn-group-justified" role="group" >
-            <a href="#" id="start-over" class="btn btn-default start-over">Start over</a>
-            {{#if $neq currentOrder 1}}<a href="#" id="back" class="btn btn-default">Back</a>{{/if}}
-            <a href="#" id="forward" class="btn btn-primary">Forward</a>
+
+            <!-- Reset -->
+            <a href="#" id="start-over" class="btn btn-default start-over">
+              {{#if $.Session.equals 'currentLanguage' 'en'}}
+                Reset
+              {{else}}
+                Reiniciar
+              {{/if}}
+            </a>
+
+            <!-- Back -->
+            {{#if $neq currentOrder 1}}
+              <!-- Only display back when it isn't the same as Reset -->
+              <a href="#" id="back" class="btn btn-default">
+                {{#if $.Session.equals 'currentLanguage' 'en'}}
+                  Previous
+                {{else}}
+                  Anterior
+                {{/if}}
+              </a>
+            {{/if}}
+
+            <!-- Next -->
+            <a href="#" id="forward" class="btn btn-primary">
+              {{#if $.Session.equals 'currentLanguage' 'en'}}
+                Next
+              {{else}}
+                Siguiente
+              {{/if}}
+            </a>
+
           </div>
         {{else}}
+
+          <!-- Begin -->
           <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
               <div class="btn-group btn-group-lg btn-group-justified" role="group" >
