@@ -8,18 +8,29 @@
  * Establish {{variables}} for use in the component.html template
  */
 Template.component.helpers({
+
+    // Expose the steps collection in the component template
+    steps: function() {
+         // Sort steps by order
+        return Steps.find({}, {sort: {order: 1}});
+    },
+
+    // Expose Meteor session variables to enable reactive template changes
+    // when the session changes.
+    //
+    // Allows us to switch languages and highlighted steps.
     currentLanguage: function() {
         return Session.get('currentLanguage');
     },
-    english: function() {
-        return false;
+    currentOrder: function () {
+        return Session.get('currentOrder');
     },
-    steps: function() {
-        /**
-         * Sort steps by order
-         */
-        return Steps.find({}, {sort: {order: 1}});
+    currentOrderPad: function () {
+        var currentOrder = Session.get('currentOrder');
+        return _s.lpad(currentOrder, 4, '0');
     },
+
+    // Auto Form helper to prompt before deleting items
     beforeRemove: function () {
         return function (collection, id) {
             var doc = collection.findOne(id);
@@ -28,13 +39,6 @@ Template.component.helpers({
             }
         };
     },
-    currentOrder: function () {
-        return Session.get('currentOrder');
-    },
-    currentOrderPad: function () {
-        var currentOrder = Session.get('currentOrder');
-        return _s.lpad(currentOrder, 4, '0');
-    }
 
 });
 
