@@ -7,6 +7,7 @@ body {
 
 .container {
   max-width: 1024px;
+  height: 750px;
   background: #FFF;
   overflow: hidden;
   -webkit-box-shadow: 0px 5px 56px -14px rgba(0,0,0,0.51);
@@ -48,8 +49,10 @@ pre.copy {
   background: #a2afc2;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-left: -15px;
-  margin-right: -15px;
+  position: fixed;
+  bottom: 18px;
+  left: 27px;
+  width: 970px;
 }
 
 .footer btn-default {
