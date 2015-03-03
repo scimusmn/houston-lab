@@ -1,6 +1,6 @@
 <template name="component">
   <div class="row">
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-sm-offset-1 col-sm-10">
 
       {{#if currentUser}}
       {{/if}}
@@ -8,7 +8,7 @@
       {{#with component}}
         <div class="component">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-sm-8">
               <h3>
                 {{#if currentUser}}
                   <span id="text" data-type="text" data-field-name="componentNumber">
@@ -45,21 +45,19 @@
               </h3>
             </div>
             {{#if currentUser}}
-              <div class="col-md-4 component-edit-btns">
+              <div class="col-sm-4 component-edit-btns">
                 <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
                 {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
               </div>
             {{/if}}
           </div>
 
-          <hr>
-
           <div class="row">
 
             {{#if currentOrder}}
 
               <!-- Video -->
-              <div class="col-md-5">
+              <div class="col-sm-5">
                 <video id="stepVideo" class="video-js vjs-default-skin" controls preload="auto" width="320" height="240" data-setup="{}">
                   <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4" type='video/mp4' />
                 </video>
@@ -68,11 +66,12 @@
                 <audio id="stepAudio">
                   <source src="/audio/{{componentNumber}}/{{currentOrderPad}}.mp3" type="audio/mpeg">
                 </audio>
+
               </div>
 
 
               <!-- Steps -->
-              <div class="col-md-7 steps">
+              <div class="col-sm-7 steps">
                 {{#each steps}}
                   <div id="step-{{link}}" data-order="{{order}}" class="step-container">
                     <div data-link="{{link}}" class="step">
@@ -89,7 +88,7 @@
             {{else}}
 
               <!-- Body -->
-              <div class="col-md-offset-1 col-md-10">
+              <div class="col-sm-offset-1 col-sm-10">
 
                 <audio id="bodyAudio">
                   <source src="/audio/{{componentNumber}}/intro.mp3" type="audio/mpeg">
@@ -128,7 +127,7 @@
           </div>
         {{else}}
           <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-sm-6 col-sm-offset-3">
               <div class="btn-group btn-group-lg btn-group-justified" role="group" >
                 <a href="#" id="begin" class="btn btn-default">
                   {{#if $.Session.equals 'currentLanguage' 'en'}}
