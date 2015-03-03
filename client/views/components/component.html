@@ -2,9 +2,6 @@
   <div class="row">
     <div class="col-sm-offset-1 col-sm-10">
 
-      {{#if currentUser}}
-      {{/if}}
-
       {{#with component}}
         <div class="component">
           <div class="row">
@@ -69,7 +66,6 @@
 
               </div>
 
-
               <!-- Steps -->
               <div class="col-sm-7 steps">
                 {{#each steps}}
@@ -90,16 +86,17 @@
               <!-- Body -->
               <div class="col-sm-offset-1 col-sm-10">
 
+                <!-- Body audio -->
                 <audio id="bodyAudio">
                   <source src="/audio/{{componentNumber}}/intro-{{currentLanguage}}.mp3" type="audio/mpeg">
                 </audio>
-                <!-- Body - English -->
+                <!-- Body text - English -->
                 {{#if $.Session.equals 'currentLanguage' 'en'}}
                   <pre class="copy">
                     {{componentBody}}
                   </pre>
 
-                <!-- Body - Spanish -->
+                <!-- Body text - Spanish -->
                 {{else}}
                   <pre class="copy">
                     {{componentBodyEs}}

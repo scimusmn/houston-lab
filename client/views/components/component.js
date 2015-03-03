@@ -1,10 +1,12 @@
 /**
  * Single component template code
  */
-Template.component.created = function () {
-    //
-};
 
+/**
+ * Helpers
+ *
+ * Establish {{variables}} for use in the component.html template
+ */
 Template.component.helpers({
     currentLanguage: function() {
         return Session.get('currentLanguage');
@@ -36,6 +38,11 @@ Template.component.helpers({
 
 });
 
+/**
+ * Rendered
+ *
+ * Actions to complete when the component page is first loaded
+ */
 Template.component.rendered = function () {
     /**
      * Ignore the session if you come to the page without a hash link
@@ -65,11 +72,16 @@ Template.component.rendered = function () {
      * Play body audio on component home page
      */
     setTimeout(function(){
-        playAudio('bodyAudio');
+        playMedia('audio', 'bodyAudio');
     }, 500);
 
 };
 
+/**
+ * Events
+ *
+ * Actions to take based on user input
+ */
 Template.component.events({
     'click #edit-link': function(e) {
         e.preventDefault();
@@ -167,13 +179,13 @@ Template.component.events({
         uri.hash(nextOrderHash);
         Router.go(uri.href());
 
-        //
-        // Load the next step
-        //
-        // Wait for a short bit so that the DOM element will be there.
-        // We need to do this for the switch from the first body section
-        // where the step divs haven't loaded yet.
-        //
+        /**
+         * Load the next step
+         *
+         * Wait for a short bit so that the DOM element will be there.
+         * We need to do this for the switch from the first body section
+         * where the step divs haven't loaded yet.
+         */
         var timeout;
         if (currentOrder === 0) {
             timeout = 500;
@@ -210,11 +222,11 @@ Template.component.events({
 });
 
 function playAudio(id) {
-    var audio = getAudio(id);
+    var audio = getMedia('audio', id);
     audio.load();
     audio.play();
 }
 
-function getAudio(id) {
-    return $('audio#' + id)[0];
+function getMedia(type, id) {
+    return $(type + '#' + id)[0];
 }
