@@ -44,6 +44,7 @@ Template.component.helpers({
  * Actions to complete when the component page is first loaded
  */
 Template.component.rendered = function () {
+
     /**
      * Ignore the session if you come to the page without a hash link
      */
@@ -110,9 +111,7 @@ Template.component.events({
         $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
 
         setTimeout(function(){
-            var audio = $('audio#bodyAudio')[0];
-            audio.load();
-            audio.play();
+            playMedia('audio', 'bodyAudio');
         }, 500);
     },
 
@@ -120,9 +119,7 @@ Template.component.events({
         e.preventDefault();
 
         // Stop the current step audio
-        var audio = $('audio#stepAudio')[0];
-        audio.pause();
-        audio.currentTime = 0;
+        var audio = stopMedia('audio', 'stepAudio');
 
         var currentOrder;
         var nextOrder;
@@ -150,10 +147,11 @@ Template.component.events({
 
         console.log('Starting previous slide\'s audio');
         setTimeout(function(){
+            playMedia('video', 'stepVideo');
             //var audio = $('audio#bodyAudio')[0];
             audio.load();
             audio.play();
-        }, 500);
+        }, 200);
 
     },
     'click #forward, click #begin': function(e) {
@@ -198,16 +196,11 @@ Template.component.events({
             //
             // Switch video
             //
-            var video = $('video#stepVideo')[0];
-            //video.src = videoPath;
-            video.load();
-            video.play();
+            playMedia('video', 'stepVideo');
 
             // Load the audio element again.
             // The source is changed in the template.
-            var audio = $('audio#stepAudio')[0];
-            audio.load();
-            audio.play();
+            playMedia('audio', 'stepAudio');
 
             //
             // Animate in step text
@@ -221,10 +214,23 @@ Template.component.events({
 
 });
 
-function playAudio(id) {
-    var audio = getMedia('audio', id);
-    audio.load();
-    audio.play();
+/**
+ * Media functions
+ *
+ * Playing and restarting audio and video files
+ */
+function stopMedia(type, id) {
+    var media = getMedia(type, id);
+    media.pause();
+    media.currentTime = 0;
+    return media;
+}
+
+function playMedia(type, id) {
+    var media = getMedia(type, id);
+    media.load();
+    media.play();
+    return media;
 }
 
 function getMedia(type, id) {
