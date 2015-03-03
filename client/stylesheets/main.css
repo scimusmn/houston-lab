@@ -44,7 +44,29 @@ pre.copy {
  * Footer
  */
 .footer {
-  margin-bottom: 20px;
+  /*background: #afada3;*/
+  background: #a2afc2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.footer btn-default {
+  background: none;
+}
+
+.footer .btn-default {
+  border-color: #666;
+}
+
+.footer .btn-default:hover,
+.footer .btn-default:focus,
+.footer .btn-default.focus,
+.footer .btn-default:active,
+.footer .btn-default.active,
+.footer .open > .dropdown-toggle.btn-default {
+  border-color: #444;
 }
 
 /**
