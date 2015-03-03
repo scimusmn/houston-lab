@@ -121,8 +121,8 @@
         {{#if currentOrder}}
           <div class="btn-group btn-group-lg btn-group-justified" role="group" >
             <a href="#" id="start-over" class="btn btn-default start-over">Start over</a>
-            <a href="#" id="back" class="btn btn-default">Back</a>
-            <a href="#" id="forward" class="btn btn-default">Forward</a>
+            {{#if $neq currentOrder 1}}<a href="#" id="back" class="btn btn-default">Back</a>{{/if}}
+            <a href="#" id="forward" class="btn btn-primary">Forward</a>
           </div>
         {{else}}
           <div class="row">
