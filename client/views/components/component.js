@@ -145,12 +145,9 @@ Template.component.events({
         $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
         $('div[data-order=' + nextOrder + '] div').removeClass().addClass('step-active');
 
-        console.log('Starting previous slide\'s audio');
         setTimeout(function(){
             playMedia('video', 'stepVideo');
-            //var audio = $('audio#bodyAudio')[0];
-            audio.load();
-            audio.play();
+            playMedia(audio);
         }, 200);
 
     },
@@ -227,7 +224,16 @@ function stopMedia(type, id) {
 }
 
 function playMedia(type, id) {
-    var media = getMedia(type, id);
+    /**
+     * Use an existing object, or find it in the DOM if type is a string
+     */
+    var media;
+    if (typeof type=='object') {
+        media = type;
+    }
+    else {
+        media = getMedia(type, id);
+    }
     media.load();
     media.play();
     return media;
