@@ -91,8 +91,7 @@
               <div class="col-sm-offset-1 col-sm-10">
 
                 <audio id="bodyAudio">
-                  <source src="/audio/{{componentNumber}}/intro.mp3" type="audio/mpeg">
-                  Your browser does not support the audio element.
+                  <source src="/audio/{{componentNumber}}/intro-{{currentLanguage}}.mp3" type="audio/mpeg">
                 </audio>
                 <!-- Body - English -->
                 {{#if $.Session.equals 'currentLanguage' 'en'}}
