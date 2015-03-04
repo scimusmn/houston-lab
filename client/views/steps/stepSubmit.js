@@ -6,6 +6,10 @@ function parentLink() {
     return Router.current().params.query.link;
 }
 
+function order() {
+    return Router.current().params.query.order;
+}
+
 Template.stepSubmit.rendered = function() {
     //
 };
@@ -19,6 +23,9 @@ Template.stepSubmit.helpers({
     },
     parentLinkHelper: function() {
         return parentLink();
+    },
+    orderHelper: function() {
+        return order();
     }
 });
 
