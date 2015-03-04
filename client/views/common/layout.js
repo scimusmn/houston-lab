@@ -3,9 +3,6 @@ Template.layout.rendered = function () {
         Session.set('currentLanguage', 'en');
         $('.en-switch').addClass('active');
     }
-    var currentLanguage = Session.get('currentLanguage');
-    console.log('currentLanguage - ', currentLanguage);
-    //Session.set('currentLanguage', 'en');
 };
 
 Template.layout.events({
@@ -32,11 +29,5 @@ Template.layout.events({
             audio.load();
             audio.play();
         }, 500);
-
-        //// Retrieve the unique ID of the player that's been clicked
-        //var playerId = this._id;
-
-        //// Create a session to store the unique ID of the clicked player
-        //Session.set('selectedPlayer', playerId);
     }
 });

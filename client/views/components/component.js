@@ -66,13 +66,13 @@ Template.component.rendered = function () {
      * Animate the page elements in based on the session value
      */
     var currentOrder = Session.get('currentOrder');
-
     setTimeout(function(){
         // Play body audio on component home page
         if (currentOrder===0) {
             playMedia('audio', 'bodyAudio');
         }
         else {
+
             // Animate in all the steps up to the current one
             var range = _.range(1, (currentOrder + 1));
             _.each(range, function(i) {
@@ -80,12 +80,14 @@ Template.component.rendered = function () {
                     removeClass().
                     addClass('animated bounceInRight');
             });
+
             // Make the current step active and play current media
             $('div[data-order=' + currentOrder + '] div').addClass('step-active');
             playMedia('audio', 'stepAudio');
             setTimeout(function(){
                 playMedia('video', 'stepVideo');
             }, 200);
+
         }
     }, 500);
 
@@ -178,8 +180,7 @@ Template.component.events({
         Session.set('currentOrder', nextOrder);
 
         // Set the URL with a hash to track our step progress
-        var nextOrderPad = _s.lpad(nextOrder, 4, '0');
-        var nextOrderHash = 'step-' + nextOrderPad;
+        var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
         var path = Router.current().location.get().originalUrl;
         var uri = new URI(path);
         uri.hash(nextOrderHash);
