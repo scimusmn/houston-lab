@@ -66,18 +66,29 @@ Template.component.rendered = function () {
      * Animate the page elements in based on the session value
      */
     var currentOrder = Session.get('currentOrder');
-    var range = _.range(1, (currentOrder + 1));
-    _.each(range, function(i) {
-        $('div[data-order=' + i + '] div').
-            removeClass().
-            addClass('animated bounceInRight');
-    });
+    console.log('currentOrder - ', currentOrder);
 
-    /**
-     * Play body audio on component home page
-     */
+    // Wait for the page to load
     setTimeout(function(){
-        playMedia('audio', 'bodyAudio');
+        // Play body audio on component home page
+        if (currentOrder===0) {
+            playMedia('audio', 'bodyAudio');
+        }
+        else {
+            // Animate in all the steps up to the current one
+            var range = _.range(1, (currentOrder + 1));
+            _.each(range, function(i) {
+                $('div[data-order=' + i + '] div').
+                    removeClass().
+                    addClass('animated bounceInRight');
+            });
+            // Make the current step active and play current media
+            $('div[data-order=' + currentOrder + '] div').addClass('step-active');
+            playMedia('audio', 'stepAudio');
+            setTimeout(function(){
+                playMedia('video', 'stepVideo');
+            }, 200);
+        }
     }, 500);
 
 };
