@@ -64,6 +64,10 @@
                   <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3" type="audio/mpeg">
                 </audio>
 
+                {{#if currentUser}}
+                  <a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{maxOrder}}">Add new step</a>
+                {{/if}}
+
               </div>
 
               <!-- Steps -->
@@ -75,10 +79,6 @@
                     </div>
                   </div>
                 {{/each}}
-
-                {{#if currentUser}}
-                  <a class="btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{maxOrder}}">Add new step</a>
-                {{/if}}
               </div>
 
             {{else}}

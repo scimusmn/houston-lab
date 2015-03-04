@@ -93,6 +93,10 @@ pre.copy {
   overflow: hidden;
 }
 
+.btn-add-step {
+  margin: 10px;
+}
+
 .steps {
   font-size: 20px;
 }
