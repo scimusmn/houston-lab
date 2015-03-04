@@ -66,9 +66,7 @@ Template.component.rendered = function () {
      * Animate the page elements in based on the session value
      */
     var currentOrder = Session.get('currentOrder');
-    console.log('currentOrder - ', currentOrder);
 
-    // Wait for the page to load
     setTimeout(function(){
         // Play body audio on component home page
         if (currentOrder===0) {
@@ -106,7 +104,6 @@ Template.component.events({
     'click .edit-step-link': function(e) {
         e.preventDefault();
         // Fix this to go to the correct edit page for this link
-        console.log('this- ', this);
         Router.go('stepEdit', {
             componentNumber: this.componentNumber,
             parentLink: this.parentLink,
@@ -116,7 +113,6 @@ Template.component.events({
     },
 
     'click #start-over': function(e) {
-        console.log('this- ', this);
         e.preventDefault();
         Session.set('currentOrder', 0);
         Router.go('component', {
