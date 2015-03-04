@@ -88,6 +88,11 @@ pre.copy {
 /**
  * Steps
  */
+.instruction-area {
+  height: 555px;
+  overflow: hidden;
+}
+
 .steps {
   font-size: 20px;
 }
@@ -123,7 +128,6 @@ div.step-active {
   background: #EAEAEA;
   color: #333;
 }
-
 
 /**
  * Forms
