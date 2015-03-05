@@ -46,6 +46,11 @@ Template.component.helpers({
         };
     },
 
+    // Dev mouse position helper
+    mouseCoord: function () {
+        return Session.get('mouseCoord');
+    }
+
 });
 
 /**
@@ -105,6 +110,10 @@ Template.component.rendered = function () {
  * Actions to take based on user input
  */
 Template.component.events({
+    'mousemove': function(e) {
+        Session.set('mouseCoord', 'x,y: ' + e.pageX + ', ' + e.pageY);
+    },
+
     'click #edit-link': function(e) {
         e.preventDefault();
         Router.go( Router.current().location.get().path + '/edit' );
