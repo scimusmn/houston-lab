@@ -149,8 +149,37 @@ Template.component.events({
             nextOrder = 0;
         }
 
+        console.log('BACK');
+        console.log('back: currentOrder - ', currentOrder);
+        console.log('back: nextOrder - ', nextOrder);
+
         // Set the session for reactions in the template
         Session.set('currentOrder', nextOrder);
+
+        var pager = $('div[data-order=' + currentOrder + ']').data('pager');
+        var prevPager = [];
+        $('div[data-pager=true]').each(function() {
+            prevPager.push($(this).data('order'));
+        });
+
+        if (pager) {
+            $('div.step-container div').hide();
+            console.log('nextOrder - ', nextOrder);
+            console.log('default - prevPager - ', prevPager);
+
+            prevPager = prevPager.filter(function (element) {
+                return element < currentOrder;
+            });
+            prevPager = prevPager.sort();
+            console.log('prevPager - ', prevPager);
+
+            $('div.step-container div').slice((prevPager[0] - 1), nextOrder).show();
+            $('div[data-order=' + nextOrder + '] div').addClass('step-active');
+        }
+        else {
+            $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
+            $('div[data-order=' + nextOrder + '] div').removeClass().addClass('step-active');
+        }
 
         // Set the URL with a hash to track our step progress
         var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
@@ -159,8 +188,6 @@ Template.component.events({
         uri.hash(nextOrderHash);
         Router.go(uri.href());
 
-        $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
-        $('div[data-order=' + nextOrder + '] div').removeClass().addClass('step-active');
 
         setTimeout(function(){
             playMedia('video', 'stepVideo');
@@ -182,6 +209,17 @@ Template.component.events({
         // Set the session for reactions in the template
         var nextOrder = (currentOrder + 1);
         Session.set('currentOrder', nextOrder);
+
+        console.log('FWD');
+        console.log('fwd: currentOrder - ', currentOrder);
+        console.log('fwd: nextOrder - ', nextOrder);
+
+        // Check if the upcoming step is a pager
+        var pager = $('div[data-order=' + nextOrder + ']').data('pager');
+        if (pager) {
+            $('div.step-container div').show();
+            $('div.step-container div').slice(0, currentOrder).hide();
+        }
 
         // Set the URL with a hash to track our step progress
         var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');

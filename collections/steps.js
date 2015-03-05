@@ -19,6 +19,10 @@ Steps.attachSchema(new SimpleSchema({
         type: Number,
         label: 'Order'
     },
+    pager: {
+        type: Boolean,
+        label: 'Pager'
+    },
     link: {
         type: String,
         label: 'Link',

@@ -4,14 +4,29 @@
 
     <fieldset>
       <legend>Update this Step</legend>
-      {{> afQuickField autofocus='' value=componentNumberHelper name='componentNumber'}}
-      {{> afQuickField value=parentLinkHelper name='parentLink'}}
-      {{> afQuickField name='order'}}
-      {{> afQuickField class='disabled' name='link'}}
+      <div class="row">
+        <div class="col-sm-4">
+          {{> afQuickField autofocus='' value=componentNumberHelper name='componentNumber'}}
+        </div>
+        <div class="col-sm-4">
+          {{> afQuickField value=parentLinkHelper name='parentLink'}}
+        </div>
+        <div class="col-sm-4">
+          {{> afQuickField class='disabled' name='link'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          {{> afQuickField name='order'}}
+        </div>
+        <div class="col-sm-6">
+          {{> afQuickField name='pager'}}
+        </div>
+      </div>
       {{> afQuickField name='title'}}
       {{> afQuickField name='titleEs'}}
     </fieldset>
-    <button type="submit" class="btn btn-primary">Insert</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 
   {{/autoForm}}
 

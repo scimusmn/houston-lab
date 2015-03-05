@@ -73,7 +73,9 @@
               <!-- Steps -->
               <div class="col-sm-7 steps">
                 {{#each steps}}
-                  <div id="step-{{link}}" data-order="{{order}}" class="step-container">
+                  <div id="step-{{link}}" data-order="{{order}}"
+                  data-pager="{{#if pager}}true{{else}}false{{/if}}"
+                  class="step-container">
                     <div data-link="{{link}}" class="step">
                       {{> step}}
                     </div>

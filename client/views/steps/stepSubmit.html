@@ -4,9 +4,22 @@
 
     <fieldset>
       <legend>Add a Step</legend>
-      {{> afQuickField autofocus='' value=componentNumberHelper name='componentNumber'}}
-      {{> afQuickField value=parentLinkHelper name='parentLink'}}
-      {{> afQuickField value=orderHelper name='order'}}
+      <div class="row">
+        <div class="col-sm-6">
+          {{> afQuickField autofocus='' value=componentNumberHelper name='componentNumber'}}
+        </div>
+        <div class="col-sm-6">
+          {{> afQuickField value=parentLinkHelper name='parentLink'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          {{> afQuickField value=orderHelper name='order'}}
+        </div>
+        <div class="col-sm-6">
+          {{> afQuickField name='pager'}}
+        </div>
+      </div>
       {{> afQuickField name='title'}}
       {{> afQuickField name='titleEs'}}
     </fieldset>
