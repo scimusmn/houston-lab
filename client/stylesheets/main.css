@@ -3,6 +3,10 @@
  */
 body {
   background-image: url("/images/seamless_paper_texture.png");
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .container {
