@@ -168,12 +168,13 @@ Template.component.events({
             $('div.step-container div').hide();
             console.log('nextOrder - ', nextOrder);
             console.log('default - prevPager - ', prevPager);
+            prevPager = prevPager.sort(sortNumber).reverse();
+            console.log('sort - prevPager - ', prevPager);
 
             prevPager = prevPager.filter(function (element) {
                 return element < currentOrder;
             });
-            prevPager = prevPager.sort();
-            console.log('prevPager - ', prevPager);
+            console.log('filtered - prevPager - ', prevPager);
 
             $('div.step-container div').slice((prevPager[0] - 1), nextOrder).show();
             $('div[data-order=' + nextOrder + '] div').addClass('step-active');
@@ -302,4 +303,8 @@ function getMedia(type, id) {
 function maxOrder() {
     var orders = Steps.find({}, {sort: {order: -1}, limit: 1 });
     return orders.fetch()[0].order;
+}
+
+function sortNumber(a,b) {
+    return a - b;
 }
