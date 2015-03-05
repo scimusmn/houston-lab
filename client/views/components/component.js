@@ -30,8 +30,10 @@ Template.component.helpers({
         return _s.lpad(currentOrder, 4, '0');
     },
     maxOrder: function () {
-        var orders = Steps.find({}, {sort: {order: -1}, limit: 1 });
-        return (orders.fetch()[0].order + 1);
+        return maxOrder();
+    },
+    newStepOrder: function () {
+        return (maxOrder() + 1);
     },
 
     // Auto Form helper to prompt before deleting items
@@ -295,4 +297,9 @@ function playMedia(type, id) {
 
 function getMedia(type, id) {
     return $(type + '#' + id)[0];
+}
+
+function maxOrder() {
+    var orders = Steps.find({}, {sort: {order: -1}, limit: 1 });
+    return orders.fetch()[0].order;
 }

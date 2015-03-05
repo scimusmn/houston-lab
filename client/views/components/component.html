@@ -65,7 +65,7 @@
                 </audio>
 
                 {{#if currentUser}}
-                  <a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{maxOrder}}">Add new step</a>
+                  <a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{newStepOrder}}">Add new step</a>
                 {{/if}}
 
               </div>
@@ -90,7 +90,7 @@
 
                 <!-- Body audio -->
                 <audio id="bodyAudio">
-                  <source src="/audio/{{componentNumber}}/intro-{{currentLanguage}}.mp3" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/intro-{{currentLanguage}}.mp3?fsdjkl" type="audio/mpeg">
                 </audio>
                 <!-- Body text - English -->
                 {{#if $.Session.equals 'currentLanguage' 'en'}}
@@ -142,13 +142,16 @@
             {{/if}}
 
             <!-- Next -->
-            <a href="#" id="forward" class="btn btn-primary">
-              {{#if $.Session.equals 'currentLanguage' 'en'}}
-                Next
-              {{else}}
-                Siguiente
-              {{/if}}
-            </a>
+            {{#if $neq currentOrder maxOrder}}
+              <!-- Only display forward if you're not at the end -->
+              <a href="#" id="forward" class="btn btn-primary">
+                {{#if $.Session.equals 'currentLanguage' 'en'}}
+                  Next
+                {{else}}
+                  Siguiente
+                {{/if}}
+              </a>
+            {{/if}}
 
           </div>
         {{else}}
