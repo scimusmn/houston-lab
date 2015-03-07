@@ -180,7 +180,7 @@ Template.component.events({
         //Router.go( Router.current().location.get().path + '/' + this.link + '/edit' );
     },
 
-    'click #start-over': function(e) {
+    'click #reset': function(e) {
         e.preventDefault();
         goReset();
     },
@@ -202,11 +202,14 @@ Template.component.events({
  */
 function goReset() {
     Session.set('currentOrder', 0);
-    Router.go('component', {
-        componentNumber: this.component.componentNumber,
-        componentLink: this.component.componentLink
-    });
+
+    // Animate out steps
     $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
+
+    // Make the URL match the current step
+    var nextOrder = 0;
+    setURL(nextOrder);
+
     setTimeout(function(){
         playMedia('audio', 'bodyAudio');
     }, 500);
@@ -260,13 +263,8 @@ function goPrevious() {
         $('div[data-order=' + nextOrder + '] div').removeClass().addClass('step-active');
     }
 
-    // Set the URL with a hash to track our step progress
-    var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
-    var path = Router.current().location.get().originalUrl;
-    var uri = new URI(path);
-    uri.hash(nextOrderHash);
-    Router.go(uri.href());
-
+    // Make the URL match the current step
+    setURL(nextOrder);
 
     setTimeout(function(){
         playMedia('video', 'stepVideo');
@@ -298,12 +296,8 @@ function goNext() {
         $('div.step-container div').slice(0, currentOrder).hide();
     }
 
-    // Set the URL with a hash to track our step progress
-    var nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
-    var path = Router.current().location.get().originalUrl;
-    var uri = new URI(path);
-    uri.hash(nextOrderHash);
-    Router.go(uri.href());
+    // Make the URL match the current step
+    setURL(nextOrder);
 
     /**
      * Load the next step
@@ -379,3 +373,24 @@ function maxOrder() {
 function sortNumber(a,b) {
     return a - b;
 }
+
+/**
+ * Set the URL with a hash to track our step progress
+ * Remove the hash all together if you're at step 0,
+ * aka the component intro page
+ */
+function setURL(nextOrder) {
+    var nextOrderHash;
+    if (nextOrder === 0) {
+        nextOrderHash = '';
+    }
+    else {
+        nextOrderHash = 'step-' + _s.lpad(nextOrder, 4, '0');
+    }
+    var path = Router.current().location.get().originalUrl;
+    var uri = new URI(path);
+    uri.hash(nextOrderHash);
+    Router.go(uri.href());
+}
+
+
