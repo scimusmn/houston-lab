@@ -59,8 +59,12 @@ Template.component.helpers({
  * Actions to complete when the component page is first loaded
  */
 Template.component.rendered = function () {
+
     /**
-     * Ignore the session if you come to the page without a hash link
+     * Set the a session value to track the currentOrder based on the URL
+     *
+     * If there is no step hash in the URL, you're on the homepage. Set the
+     * session variable to 0.
      */
     var path = Router.current().location.get().originalUrl;
     var uri = new URI(path);
@@ -73,40 +77,52 @@ Template.component.rendered = function () {
     }
 
     /**
-     * Animate the page elements in based on the session value
+     * Setup page content based on the currentOrder
      */
     var currentOrder = Session.get('currentOrder');
-    setTimeout(function(){
-        // Play body audio on component home page
-        var nextOrder = (currentOrder + 1);
+    var nextOrder = (currentOrder + 1);
+    devTrackStep('render', currentOrder, nextOrder);
+    Meteor.setTimeout(function(){
+
+        // On the homepage, all we need to do is play the intro audio
         if (currentOrder===0) {
             playMedia('audio', 'bodyAudio');
         }
-        else {
-            devTrackStep('render', currentOrder, nextOrder);
 
-            // Animate in all the steps up to the current one
-            var pager = $('div[data-order=' + nextOrder + ']').data('pager');
+        // On interior pages, we play the video, audio, and animate in steps
+        else {
+
+            // Show everything to start.
+            // This allows us to get all of the DOM info
             $('div.step-container div').show();
-            if (pager) {
-                //$('div.step-container div').show();
-                //$('div.step-container div').slice(0, currentOrder).hide();
-            }
-            var prevPager = [];
+
+            // Display a selection of steps, from the previous pager to the
+            // current step. If there is no previous pager, set the start
+            // value to 1.
+
+            // Build array of pagers
+            var prevPager = [0];
             $('div[data-pager=true]').each(function() {
                 prevPager.push($(this).data('order'));
             });
+            // Sort it numerically
             prevPager = prevPager.sort(sortNumber);
 
+            // Filter array to only show orders below or equal to current order
             prevPager = prevPager.filter(function (element) {
-                return element < currentOrder;
+                return element <= currentOrder;
             });
 
+            // Hide everything and reset the style to the offscreen default
             var range = _.range(0, _.last(prevPager));
             _.each(range, function(i) {
                 $('div[data-order=' + i + '] div').
-                    hide();
+                    hide().
+                    removeClass().
+                    addClass('animated bounceInRight');
             });
+
+            // Show and animate in the filtered set of steps
             range = _.range(_.last(prevPager), nextOrder);
             _.each(range, function(i) {
                 $('div[data-order=' + i + '] div').
@@ -115,13 +131,15 @@ Template.component.rendered = function () {
                     addClass('animated bounceInRight');
             });
 
+            // Give the current step an active style
+            $('div[data-order=' + currentOrder + '] div').addClass('step-active');
+
             // Play video and audio
             playMedia('audio', 'stepAudio');
-            setTimeout(function(){
+            Meteor.setTimeout(function(){
                 playMedia('video', 'stepVideo');
-            }, 500);
+            }, 1000);
 
-            $('div[data-order=' + currentOrder + '] div').addClass('step-active');
         }
     }, 500);
 
@@ -206,7 +224,7 @@ function goReset() {
     var nextOrder = 0;
     setURL(nextOrder);
 
-    setTimeout(function(){
+    Meteor.setTimeout(function(){
         playMedia('audio', 'bodyAudio');
     }, 500);
 }
@@ -262,9 +280,12 @@ function goPrevious() {
     // Make the URL match the current step
     setURL(nextOrder);
 
-    setTimeout(function(){
-        playMedia('video', 'stepVideo');
+    Meteor.setTimeout(function(){
+        // No video on homepage
         playMedia(audio);
+        if (nextOrder !== 0) {
+            playMedia('video', 'stepVideo');
+        }
     }, 200);
 }
 
@@ -308,7 +329,7 @@ function goNext() {
         timeout = 0;
     }
 
-    setTimeout(function(){
+    Meteor.setTimeout(function(){
         //
         // Switch video
         //
