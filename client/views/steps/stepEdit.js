@@ -2,10 +2,6 @@ Template.stepEdit.rendered = function () {
     $('input[name="componentNumber"]').focus();
 };
 
-Template.stepEdit.events({
-    //
-});
-
 AutoForm.addHooks(['updateStepsForm'], {
     onSuccess: function(operation, result, template) {
         // Delete two of the tail segemnts from the current URL to get the
@@ -14,6 +10,9 @@ AutoForm.addHooks(['updateStepsForm'], {
         var uri = new URI(path);
         uri.segment(-1, '');
         uri.segment(-1, '');
-        Router.go(uri.href());
+
+        // Return to the view on this step
+        var nextOrderHash = 'step-' + _s.lpad(template.data.doc.order, 4, '0');
+        Router.go(uri.href() + '#' + nextOrderHash);
     }
 });
