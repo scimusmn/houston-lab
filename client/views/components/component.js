@@ -83,12 +83,9 @@ Template.component.rendered = function () {
             playMedia('audio', 'bodyAudio');
         }
         else {
-            // Animate in all the steps up to the current one
+            devTrackStep('render', currentOrder, nextOrder);
 
-            console.log('Page loaded. Ready to animate in the right steps');
-            console.log('Render');
-            console.log('render: currentOrder - ', currentOrder);
-            console.log('render: nextOrder - ', nextOrder);
+            // Animate in all the steps up to the current one
             var pager = $('div[data-order=' + nextOrder + ']').data('pager');
             $('div.step-container div').show();
             if (pager) {
@@ -145,7 +142,6 @@ Template.component.rendered = function () {
 Template.body.events({
     'keyup': function(e) {
         event.preventDefault();
-        console.log('e - ', e.keyCode);
         if (e.keyCode == '38') {
             goReset();
         }
@@ -230,9 +226,7 @@ function goPrevious() {
         nextOrder = 0;
     }
 
-    console.log('BACK');
-    console.log('back: currentOrder - ', currentOrder);
-    console.log('back: nextOrder - ', nextOrder);
+    devTrackStep('previous', currentOrder, nextOrder);
 
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
@@ -245,6 +239,8 @@ function goPrevious() {
 
     if (pager) {
         $('div.step-container div').hide();
+        console.log('');
+        console.log('-----' + 'pager' + '-----');
         console.log('nextOrder - ', nextOrder);
         console.log('default - prevPager - ', prevPager);
         prevPager = prevPager.sort(sortNumber).reverse();
@@ -285,9 +281,7 @@ function goNext() {
     var nextOrder = (currentOrder + 1);
     Session.set('currentOrder', nextOrder);
 
-    console.log('FWD');
-    console.log('fwd: currentOrder - ', currentOrder);
-    console.log('fwd: nextOrder - ', nextOrder);
+    devTrackStep('next', currentOrder, nextOrder);
 
     // Check if the upcoming step is a pager
     var pager = $('div[data-order=' + nextOrder + ']').data('pager');
@@ -393,4 +387,9 @@ function setURL(nextOrder) {
     Router.go(uri.href());
 }
 
-
+function devTrackStep(operation, currentOrder, nextOrder) {
+    console.log('');
+    console.log('-----' + operation + '-----');
+    console.log(operation + ': currentOrder - ', currentOrder);
+    console.log(operation + ': nextOrder - ', nextOrder);
+}
