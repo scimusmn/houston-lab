@@ -78,26 +78,53 @@ Template.component.rendered = function () {
     var currentOrder = Session.get('currentOrder');
     setTimeout(function(){
         // Play body audio on component home page
+        var nextOrder = (currentOrder + 1);
         if (currentOrder===0) {
             playMedia('audio', 'bodyAudio');
         }
         else {
-
             // Animate in all the steps up to the current one
-            var range = _.range(1, (currentOrder + 1));
+
+            console.log('Page loaded. Ready to animate in the right steps');
+            console.log('Render');
+            console.log('render: currentOrder - ', currentOrder);
+            console.log('render: nextOrder - ', nextOrder);
+            var pager = $('div[data-order=' + nextOrder + ']').data('pager');
+            $('div.step-container div').show();
+            if (pager) {
+                //$('div.step-container div').show();
+                //$('div.step-container div').slice(0, currentOrder).hide();
+            }
+            var prevPager = [];
+            $('div[data-pager=true]').each(function() {
+                prevPager.push($(this).data('order'));
+            });
+            prevPager = prevPager.sort(sortNumber);
+
+            prevPager = prevPager.filter(function (element) {
+                return element < currentOrder;
+            });
+
+            var range = _.range(0, _.last(prevPager));
             _.each(range, function(i) {
                 $('div[data-order=' + i + '] div').
+                    hide();
+            });
+            range = _.range(_.last(prevPager), nextOrder);
+            _.each(range, function(i) {
+                $('div[data-order=' + i + '] div').
+                    show().
                     removeClass().
                     addClass('animated bounceInRight');
             });
 
-            // Make the current step active and play current media
-            $('div[data-order=' + currentOrder + '] div').addClass('step-active');
+            // Play video and audio
             playMedia('audio', 'stepAudio');
             setTimeout(function(){
                 playMedia('video', 'stepVideo');
-            }, 200);
+            }, 500);
 
+            $('div[data-order=' + currentOrder + '] div').addClass('step-active');
         }
     }, 500);
 
