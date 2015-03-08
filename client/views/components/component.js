@@ -50,6 +50,12 @@ Template.component.helpers({
     mouseCoord: function () {
         return Session.get('mouseCoord');
     }
+});
+
+Template.step.helpers({
+    timerValue: function() {
+        return Math.ceil(Session.get('timerValue'));
+    }
 
 });
 
@@ -140,6 +146,9 @@ Template.component.rendered = function () {
                 playMedia('video', 'stepVideo');
             }, 1000);
 
+            // Timer steps
+            checkTimer(currentOrder, 100);
+
         }
     }, 500);
 
@@ -215,6 +224,11 @@ Template.component.events({
  * Navigation
  */
 function goReset() {
+    if (Session.get('navBlock')) {
+        console.log('Navigation blocked');
+        return;
+    }
+
     Session.set('currentOrder', 0);
 
     // Animate out steps
@@ -230,6 +244,11 @@ function goReset() {
 }
 
 function goPrevious() {
+    if (Session.get('navBlock')) {
+        console.log('Navigation blocked');
+        return;
+    }
+
     // Stop the current step audio
     var audio = stopMedia('audio', 'stepAudio');
 
@@ -290,6 +309,11 @@ function goPrevious() {
 }
 
 function goNext() {
+    if (Session.get('navBlock')) {
+        console.log('Navigation blocked');
+        return;
+    }
+
     var currentOrder;
     if (Session.get('currentOrder')) {
         currentOrder = Session.get('currentOrder');
@@ -348,6 +372,8 @@ function goNext() {
         //
         $('div.step-container div').removeClass('step-active');
         $('div[data-order=' + nextOrder + '] div').removeClass().addClass('animated bounceInRight step-active');
+
+        checkTimer(nextOrder, 100);
 
     }, timeout);
 }
@@ -417,4 +443,49 @@ function devTrackStep(operation, currentOrder, nextOrder) {
     console.log('-----' + operation + '-----');
     console.log(operation + ': currentOrder - ', currentOrder);
     console.log(operation + ': nextOrder - ', nextOrder);
+}
+
+function checkTimer(currentOrder, intervalMiliseconds) {
+    var clock;
+    clock = $('div#step-timer-' + currentOrder).data('timer-length');
+    if (clock) {
+        console.log('Timer present');
+        startTimer(currentOrder, intervalMiliseconds);
+    } else {
+        console.log('No timer');
+    }
+}
+
+function startTimer(currentOrder, intervalMiliseconds) {
+    var clock, timeLeft, interval;
+
+    // Reset the timer
+    Meteor.clearInterval(interval);
+
+    // Block navigation
+    Session.set('navBlock', true);
+
+    // TODO - Do this without the DOM
+    clock = $('div#step-timer-' + currentOrder).data('timer-length');
+    timeLeft = function() {
+        if (clock > 0) {
+            // Store the full real number
+            clock = (clock - (intervalMiliseconds / 1000));
+            Session.set('timerValue', clock);
+            return console.log(clock);
+        } else {
+            console.log('Timer done');
+
+            // Unblock navigation
+            Session.set('navBlock', false);
+
+            // Go to the next step automatically
+            goNext();
+
+            // Clear timer. This must be done last or else you'll break
+            // out of the conditional
+            return Meteor.clearInterval(interval);
+        }
+    };
+    interval = Meteor.setInterval(timeLeft, intervalMiliseconds);
 }
