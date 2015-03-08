@@ -192,10 +192,9 @@
   {{/if}}
   {{#if timerLength}}
     <br>
-    <div id="step-timer-{{order}}" data-timer-length="{{timerLength}}">
-      Value: {{timerValue}}<br>
-      Length: {{timerLength}}
-    </div>
+    <span class="timer" id="step-timer-{{order}}" data-timer-length="{{timerLength}}">
+      Timer: {{timerValue}}
+    </span>
   {{/if}}
 
 </template>

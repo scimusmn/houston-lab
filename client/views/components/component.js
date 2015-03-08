@@ -447,17 +447,17 @@ function devTrackStep(operation, currentOrder, nextOrder) {
 
 function checkTimer(currentOrder, intervalMiliseconds) {
     var clock;
-    clock = $('div#step-timer-' + currentOrder).data('timer-length');
+    clock = $('span#step-timer-' + currentOrder).data('timer-length');
     if (clock) {
         console.log('Timer present');
-        startTimer(currentOrder, intervalMiliseconds);
+        startTimer(currentOrder, clock, intervalMiliseconds);
     } else {
         console.log('No timer');
     }
 }
 
-function startTimer(currentOrder, intervalMiliseconds) {
-    var clock, timeLeft, interval;
+function startTimer(currentOrder, clock, intervalMiliseconds) {
+    var timeLeft, interval;
 
     // Reset the timer
     Meteor.clearInterval(interval);
@@ -466,7 +466,6 @@ function startTimer(currentOrder, intervalMiliseconds) {
     Session.set('navBlock', true);
 
     // TODO - Do this without the DOM
-    clock = $('div#step-timer-' + currentOrder).data('timer-length');
     timeLeft = function() {
         if (clock > 0) {
             // Store the full real number

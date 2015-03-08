@@ -138,6 +138,16 @@ div.step-active {
 }
 
 /**
+ * Timer
+ */
+.timer {
+  text-align: center;
+  display: block;
+  margin: 10px;
+  font-size: 26px;
+}
+
+/**
  * Forms
  */
 .disabled {
