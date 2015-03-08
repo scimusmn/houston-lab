@@ -297,12 +297,16 @@ function goNext() {
     else {
         currentOrder = 0;
     }
+    var nextOrder = (currentOrder + 1);
+    devTrackStep('next', currentOrder, nextOrder);
+
+    // Exit goNext if you're trying to go beyond the current max step
+    if (nextOrder > maxOrder()) {
+        return;
+    }
 
     // Set the session for reactions in the template
-    var nextOrder = (currentOrder + 1);
     Session.set('currentOrder', nextOrder);
-
-    devTrackStep('next', currentOrder, nextOrder);
 
     // Check if the upcoming step is a pager
     var pager = $('div[data-order=' + nextOrder + ']').data('pager');
