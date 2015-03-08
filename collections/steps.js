@@ -23,6 +23,11 @@ Steps.attachSchema(new SimpleSchema({
         type: Boolean,
         label: 'Pager'
     },
+    timerLength: {
+        type: Number,
+        label: 'Timer length (sec)',
+        defaultValue: 0
+    },
     link: {
         type: String,
         label: 'Link',

@@ -36,7 +36,9 @@ Template.stepSubmit.events({
 AutoForm.addHooks(['insertStepForm'], {
     onSuccess: function(operation, result, template) {
         if (componentNumber() && parentLink()) {
-            Router.go('/components/' + componentNumber() + '-' + parentLink());
+
+            Router.go('/steps/submit?componentNumber=' + componentNumber() + '&link=' + parentLink() + '&order=' + (Number(order())+1));
+
         }
         else {
             Router.go('/components');
