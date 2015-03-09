@@ -28,6 +28,10 @@ p, div {
     font-size: 19px;
 }
 
+table {
+  background: #FFF;
+}
+
 /**
  * We use pre to render line breaks in the user edited content.
  * Reset all markup that Bootstrap places on this element
