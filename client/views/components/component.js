@@ -265,6 +265,12 @@ function goPrevious() {
 
     devTrackStep('previous', currentOrder, nextOrder);
 
+    // Check and see if an order exists for the next step.
+    // Otherwise keep incrementing the order until we find one.
+    while (checkStepExists(nextOrder) === false) {
+        nextOrder--;
+    }
+
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
 
@@ -322,21 +328,34 @@ function goNext() {
         currentOrder = 0;
     }
     var nextOrder = (currentOrder + 1);
-    devTrackStep('next', currentOrder, nextOrder);
+    devTrackStep('before next', currentOrder, nextOrder);
 
     // Exit goNext if you're trying to go beyond the current max step
     if (nextOrder > maxOrder()) {
         return;
     }
 
+    // Check and see if an order exists for the next step.
+    // Otherwise keep incrementing the order until we find one.
+    var skipped = 0;
+    while (checkStepExists(nextOrder) === false) {
+        nextOrder++;
+        skipped++;
+        console.log('skipped - ', skipped);
+        devTrackStep('next', currentOrder, nextOrder);
+    }
+
+
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
 
     // Check if the upcoming step is a pager
-    var pager = $('div[data-order=' + nextOrder + ']').data('pager');
+    var nextStepDiv = $('div[data-order=' + nextOrder + ']');
+    var pager = nextStepDiv.data('pager');
     if (pager) {
+        var sliceIndex = $('div.step-container').index(nextStepDiv);
         $('div.step-container div').show();
-        $('div.step-container div').slice(0, currentOrder).hide();
+        $('div.step-container div').slice(0, sliceIndex).hide();
     }
 
     // Make the URL match the current step
@@ -449,10 +468,7 @@ function checkTimer(currentOrder, intervalMiliseconds) {
     var clock;
     clock = $('span#step-timer-' + currentOrder).data('timer-length');
     if (clock) {
-        console.log('Timer present');
         startTimer(currentOrder, clock, intervalMiliseconds);
-    } else {
-        console.log('No timer');
     }
 }
 
@@ -487,4 +503,13 @@ function startTimer(currentOrder, clock, intervalMiliseconds) {
         }
     };
     interval = Meteor.setInterval(timeLeft, intervalMiliseconds);
+}
+
+function checkStepExists(order) {
+    var nextStep = Steps.findOne({ order: order });
+    if (nextStep) {
+        return true;
+    } else {
+        return false;
+    }
 }
