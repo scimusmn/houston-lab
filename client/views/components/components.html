@@ -36,7 +36,10 @@
                 {{/if}}
               </a></td>
               {{#if currentUser}}
-                <td>{{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}</td>
+                <td>
+                  <a class="btn btn-info" href="{{pathFor "steps"}}">Edit steps</a>
+                  {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
+                </td>
               {{/if}}
             </tr>
           {{/each}}
