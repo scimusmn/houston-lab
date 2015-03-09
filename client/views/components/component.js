@@ -196,6 +196,13 @@ Template.component.events({
         Session.set('mouseCoord', 'x,y: ' + e.pageX + ', ' + e.pageY);
     },
 
+    'click #reload-video': function(e) {
+        e.preventDefault();
+        console.log('reload video');
+        playMedia('audio', 'stepAudio');
+        playMedia('video', 'stepVideo');
+    },
+
     'click #edit-link': function(e) {
         e.preventDefault();
         Router.go( Router.current().location.get().path + '/edit' );

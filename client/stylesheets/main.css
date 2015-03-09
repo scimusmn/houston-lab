@@ -94,6 +94,13 @@ pre.copy {
 }
 
 /**
+ * Controls
+ */
+.controls {
+  text-align: center;
+}
+
+/**
  * Steps
  */
 .instruction-area {

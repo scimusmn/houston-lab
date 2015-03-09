@@ -61,14 +61,22 @@
 
                 <!-- Step Audio -->
                 <audio id="stepAudio">
-                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?smash" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?piano" type="audio/mpeg">
                 </audio>
 
-                {{#if currentUser}}
-                  <a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{newStepOrder}}">Add new step</a><br>
-                  <a class="btn btn-info" href="{{pathFor "steps"}}">Edit steps</a>
-                {{/if}}
+                <div class="controls">
 
+                  <button type="button" class="btn btn-default btn-lg" id="reload-video">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reload video
+                  </button>
+
+                  {{#if currentUser}}
+                    <br>
+                    <p><a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{newStepOrder}}">Add new step</a></p>
+                    <p><a class="btn btn-info" href="{{pathFor "steps"}}">Edit steps</a></p>
+                  {{/if}}
+
+                </div>
               </div>
 
               <!-- Steps -->
