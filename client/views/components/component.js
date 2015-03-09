@@ -265,6 +265,12 @@ function goPrevious() {
 
     devTrackStep('previous', currentOrder, nextOrder);
 
+    // Check and see if an order exists for the next step.
+    // Otherwise keep incrementing the order until we find one.
+    while (checkStepExists(nextOrder) === false) {
+        nextOrder--;
+    }
+
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
 
@@ -279,16 +285,20 @@ function goPrevious() {
         console.log('');
         console.log('-----' + 'pager' + '-----');
         console.log('nextOrder - ', nextOrder);
-        console.log('default - prevPager - ', prevPager);
+        console.log('orders with pagers - ', prevPager);
         prevPager = prevPager.sort(sortNumber).reverse();
-        console.log('sort - prevPager - ', prevPager);
+        console.log('orders with pagers sorted - ', prevPager);
 
         prevPager = prevPager.filter(function (element) {
             return element < currentOrder;
         });
         console.log('filtered - prevPager - ', prevPager);
+        console.log('slicing steps from ', prevPager[0], 'to', nextOrder);
 
-        $('div.step-container div').slice((prevPager[0] - 1), nextOrder).show();
+
+        var sliceIndex = $('div.step-container').index($('div[data-order=' + currentOrder + ']'));
+        console.log('sliceIndex - ', sliceIndex);
+        $('div.step-container div').slice((prevPager[0] - 1), sliceIndex).show();
         $('div[data-order=' + nextOrder + '] div').addClass('step-active');
     }
     else {
@@ -322,21 +332,33 @@ function goNext() {
         currentOrder = 0;
     }
     var nextOrder = (currentOrder + 1);
-    devTrackStep('next', currentOrder, nextOrder);
+    devTrackStep('before next', currentOrder, nextOrder);
 
     // Exit goNext if you're trying to go beyond the current max step
     if (nextOrder > maxOrder()) {
         return;
     }
 
+    // Check and see if an order exists for the next step.
+    // Otherwise keep incrementing the order until we find one.
+    var skipped = 0;
+    while (checkStepExists(nextOrder) === false) {
+        nextOrder++;
+        skipped++;
+        console.log('skipped - ', skipped);
+        devTrackStep('next', currentOrder, nextOrder);
+    }
+
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
 
     // Check if the upcoming step is a pager
-    var pager = $('div[data-order=' + nextOrder + ']').data('pager');
+    var nextStepDiv = $('div[data-order=' + nextOrder + ']');
+    var pager = nextStepDiv.data('pager');
     if (pager) {
+        var sliceIndex = $('div.step-container').index(nextStepDiv);
         $('div.step-container div').show();
-        $('div.step-container div').slice(0, currentOrder).hide();
+        $('div.step-container div').slice(0, sliceIndex).hide();
     }
 
     // Make the URL match the current step
@@ -449,10 +471,7 @@ function checkTimer(currentOrder, intervalMiliseconds) {
     var clock;
     clock = $('span#step-timer-' + currentOrder).data('timer-length');
     if (clock) {
-        console.log('Timer present');
         startTimer(currentOrder, clock, intervalMiliseconds);
-    } else {
-        console.log('No timer');
     }
 }
 
@@ -487,4 +506,13 @@ function startTimer(currentOrder, clock, intervalMiliseconds) {
         }
     };
     interval = Meteor.setInterval(timeLeft, intervalMiliseconds);
+}
+
+function checkStepExists(order) {
+    var nextStep = Steps.findOne({ order: order });
+    if (nextStep) {
+        return true;
+    } else {
+        return false;
+    }
 }

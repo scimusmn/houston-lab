@@ -146,14 +146,15 @@ Router.map(function() {
      * Each top level steps in the component
      */
     this.route('steps', {
-        path: '/components/:componentNumber/steps/:link',
+        path: '/components/:componentNumber' + '-' + ':componentLink/steps',
         waitOn: function () {
+            console.log('this.params.componentNumber - ', this.params.componentNumber);
             return [
-                Meteor.subscribe('singleStep', this.params.componentNumber, this.params.link )
+                Meteor.subscribe('steps', this.params.componentNumber)
             ];
         },
         //
-        // Data is the information exposed to the tempalte spacebars elements
+        // Data is the information exposed to the template spacebars elements
         // for instance
         //      {{#with page}}
         //      {{#with component}}
