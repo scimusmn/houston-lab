@@ -1,0 +1,37 @@
+<template name="steps">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th>English</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each steps}}
+        <tr>
+          <td>{{order}}</td>
+
+          <td>
+            {{#if $.Session.equals 'currentLanguage' 'en'}}
+              {{title}}
+            {{else}}
+              {{titleEs}}
+            {{/if}}
+          </td>
+
+          <td>
+            {{#if currentUser}}
+              <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
+              {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
+            {{/if}}
+          </td>
+
+        </tr>
+      {{/each}}
+    </tbody>
+
+  </table>
+</template>
+
