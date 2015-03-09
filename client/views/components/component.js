@@ -111,16 +111,25 @@ Template.component.rendered = function () {
             $('div[data-pager=true]').each(function() {
                 prevPager.push($(this).data('order'));
             });
+
+            console.log('');
+            console.log('-----' + 'pager' + '-----');
+            console.log('nextOrder - ', nextOrder);
+            console.log('orders with pagers - ', prevPager);
+
             // Sort it numerically
             prevPager = prevPager.sort(sortNumber);
+            console.log('orders with pagers sorted - ', prevPager);
 
             // Filter array to only show orders below or equal to current order
             prevPager = prevPager.filter(function (element) {
                 return element <= currentOrder;
             });
+            console.log('orders with pagers filtered - ', prevPager);
 
             // Hide everything and reset the style to the offscreen default
             var range = _.range(0, _.last(prevPager));
+            console.log('range - ', range);
             _.each(range, function(i) {
                 $('div[data-order=' + i + '] div').
                     hide().
@@ -280,6 +289,8 @@ function goPrevious() {
         prevPager.push($(this).data('order'));
     });
 
+    $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
+
     if (pager) {
         $('div.step-container div').hide();
         console.log('');
@@ -295,14 +306,21 @@ function goPrevious() {
         console.log('filtered - prevPager - ', prevPager);
         console.log('slicing steps from ', prevPager[0], 'to', nextOrder);
 
+        // Show the selection of steps between the two pagers
+        var sliceMaxIndex = $('div.step-container').index($('div[data-order=' + currentOrder + ']'));
+        var sliceMinIndex;
+        if (prevPager[0] > 0) {
+            sliceMinIndex = $('div.step-container').index($('div[data-order=' + prevPager[0] + ']'));
+        } else {
+            sliceMinIndex = 0;
+        }
+        $('div.step-container div').slice(sliceMinIndex, sliceMaxIndex).show();
 
-        var sliceIndex = $('div.step-container').index($('div[data-order=' + currentOrder + ']'));
-        console.log('sliceIndex - ', sliceIndex);
-        $('div.step-container div').slice((prevPager[0] - 1), sliceIndex).show();
+        //Identify active step
         $('div[data-order=' + nextOrder + '] div').addClass('step-active');
+
     }
     else {
-        $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
         $('div[data-order=' + nextOrder + '] div').removeClass().addClass('step-active');
     }
 
