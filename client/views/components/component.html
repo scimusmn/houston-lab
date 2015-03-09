@@ -180,7 +180,9 @@
 </template>
 
 <template name="step">
-  {{order}} -
+  {{#if currentUser}}
+    {{order}} -
+  {{/if}}
   {{#if $.Session.equals 'currentLanguage' 'en'}}
     {{title}}
   {{else}}
