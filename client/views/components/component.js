@@ -285,16 +285,20 @@ function goPrevious() {
         console.log('');
         console.log('-----' + 'pager' + '-----');
         console.log('nextOrder - ', nextOrder);
-        console.log('default - prevPager - ', prevPager);
+        console.log('orders with pagers - ', prevPager);
         prevPager = prevPager.sort(sortNumber).reverse();
-        console.log('sort - prevPager - ', prevPager);
+        console.log('orders with pagers sorted - ', prevPager);
 
         prevPager = prevPager.filter(function (element) {
             return element < currentOrder;
         });
         console.log('filtered - prevPager - ', prevPager);
+        console.log('slicing steps from ', prevPager[0], 'to', nextOrder);
 
-        $('div.step-container div').slice((prevPager[0] - 1), nextOrder).show();
+
+        var sliceIndex = $('div.step-container').index($('div[data-order=' + currentOrder + ']'));
+        console.log('sliceIndex - ', sliceIndex);
+        $('div.step-container div').slice((prevPager[0] - 1), sliceIndex).show();
         $('div[data-order=' + nextOrder + '] div').addClass('step-active');
     }
     else {
@@ -344,7 +348,6 @@ function goNext() {
         console.log('skipped - ', skipped);
         devTrackStep('next', currentOrder, nextOrder);
     }
-
 
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
