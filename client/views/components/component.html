@@ -180,18 +180,22 @@
 </template>
 
 <template name="step">
+
   {{#if currentUser}}
     {{order}} -
   {{/if}}
+
   {{#if $.Session.equals 'currentLanguage' 'en'}}
     {{title}}
   {{else}}
     {{titleEs}}
   {{/if}}
+
   {{#if currentUser}}
      - <a class="edit-step-link btn btn-primary btn-xs" href="#">Edit</a>
     {{> quickRemoveButton collection="Steps" _id=this._id beforeRemove=beforeRemove class="btn btn-danger btn-xs"}}
   {{/if}}
+
   {{#if timerLength}}
     <br>
     <span class="timer" id="step-timer-{{order}}" data-timer-length="{{timerLength}}">
