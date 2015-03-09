@@ -65,7 +65,8 @@
                 </audio>
 
                 {{#if currentUser}}
-                  <a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{newStepOrder}}">Add new step</a>
+                  <a class="btn-add-step btn btn-primary" href="/steps/submit?componentNumber={{componentNumber}}&link={{componentLink}}&order={{newStepOrder}}">Add new step</a><br>
+                  <a class="btn btn-info" href="{{pathFor "steps"}}">Edit steps</a>
                 {{/if}}
 
               </div>
