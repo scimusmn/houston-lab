@@ -35,6 +35,13 @@ Template.component.helpers({
     newStepOrder: function () {
         return (maxOrder() + 1);
     },
+    videoDisabled: function () {
+        if (Session.get('videoDisabled') === true) {
+            return true;
+        } else {
+            return false;
+        }
+    },
 
     // Auto Form helper to prompt before deleting items
     beforeRemove: function () {
@@ -81,6 +88,9 @@ Template.component.rendered = function () {
     else {
         Session.set('currentOrder', 0);
     }
+
+    // Disable video on some steps
+    setVideoState(Session.get('currentOrder'));
 
     /**
      * Setup page content based on the currentOrder
@@ -290,6 +300,9 @@ function goPrevious() {
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
 
+    // Disable video on some steps
+    setVideoState(Session.get('currentOrder'));
+
     var pager = $('div[data-order=' + currentOrder + ']').data('pager');
     var prevPager = [];
     $('div[data-pager=true]').each(function() {
@@ -376,6 +389,9 @@ function goNext() {
 
     // Set the session for reactions in the template
     Session.set('currentOrder', nextOrder);
+    //
+    // Disable video on some steps
+    setVideoState(Session.get('currentOrder'));
 
     // Check if the upcoming step is a pager
     var nextStepDiv = $('div[data-order=' + nextOrder + ']');
@@ -441,6 +457,12 @@ function playMedia(type, id) {
     /**
      * Use an existing object, or find it in the DOM if type is a string
      */
+
+    // Don't try to play videos when they're disabled
+    if (type == 'video' && Session.get('videoDisabled')) {
+        return;
+    }
+
     var media;
     if (typeof type=='object') {
         media = type;
@@ -539,5 +561,14 @@ function checkStepExists(order) {
         return true;
     } else {
         return false;
+    }
+}
+
+function setVideoState(order) {
+    var step = Steps.findOne({ order: order });
+    if (step.videoAbsent) {
+        Session.set('videoDisabled', true);
+    } else {
+        Session.set('videoDisabled', false);
     }
 }

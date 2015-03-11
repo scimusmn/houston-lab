@@ -55,9 +55,13 @@
 
               <div class="col-sm-5">
                 <!-- Step Video -->
-                <video id="stepVideo" class="video-js vjs-default-skin" preload="auto" width="320" height="240" data-setup="{}">
-                  <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4?horn" type='video/mp4' />
-                </video>
+                {{#if videoDisabled}}
+                  <div class="video-absent"></div>
+                {{else}}
+                  <video id="stepVideo" class="video-js vjs-default-skin" preload="auto" width="320" height="240" data-setup="{}">
+                    <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4?horn" type='video/mp4' />
+                  </video>
+                {{/if}}
 
                 <!-- Step Audio -->
                 <audio id="stepAudio">
@@ -66,9 +70,11 @@
 
                 <div class="controls">
 
-                  <button type="button" class="btn btn-default btn-lg" id="reload-video">
-                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reload video
-                  </button>
+                  {{#if $not videoDisabled}}
+                    <button type="button" class="btn btn-default btn-lg" id="reload-video">
+                      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reload video
+                    </button>
+                  {{/if}}
 
                   {{#if currentUser}}
                     <br>

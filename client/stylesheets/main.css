@@ -94,6 +94,15 @@ pre.copy {
 }
 
 /**
+ * Video
+ */
+.video-absent {
+  width: 320px;
+  height: 240px;
+  background: #FFF;
+}
+
+/**
  * Controls
  */
 .controls {

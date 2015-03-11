@@ -23,6 +23,10 @@ Steps.attachSchema(new SimpleSchema({
         type: Boolean,
         label: 'Pager'
     },
+    videoAbsent: {
+        type: Boolean,
+        label: 'Video absent'
+    },
     timerLength: {
         type: Number,
         label: 'Timer length (sec)',
