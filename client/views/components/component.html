@@ -59,13 +59,13 @@
                   <div class="video-absent"></div>
                 {{else}}
                   <video id="stepVideo" class="video-js vjs-default-skin" preload="auto" width="320" height="240" data-setup="{}">
-                    <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4?sky" type='video/mp4' />
+                    <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4?agar" type='video/mp4' />
                   </video>
                 {{/if}}
 
                 <!-- Step Audio -->
                 <audio id="stepAudio">
-                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?dos" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?drumrolls" type="audio/mpeg">
                 </audio>
 
                 <div class="controls">
@@ -105,7 +105,7 @@
 
                 <!-- Body audio -->
                 <audio id="bodyAudio">
-                  <source src="/audio/{{componentNumber}}/intro-{{currentLanguage}}.mp3?ghr" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/intro-{{currentLanguage}}.mp3?dew" type="audio/mpeg">
                 </audio>
                 <!-- Body text - English -->
                 {{#if $.Session.equals 'currentLanguage' 'en'}}

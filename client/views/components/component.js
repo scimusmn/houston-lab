@@ -73,6 +73,8 @@ Template.step.helpers({
  */
 Template.component.rendered = function () {
 
+    Session.set('componentNumber', this.data.component.componentNumber);
+
     /**
      * Set the a session value to track the currentOrder based on the URL
      *
@@ -539,13 +541,24 @@ function startTimer(currentOrder, clock, intervalMiliseconds) {
             Session.set('timerValue', clock);
             return console.log(clock);
         } else {
-            console.log('Timer done');
+            console.log('Timer done', currentOrder);
 
             // Unblock navigation
             Session.set('navBlock', false);
 
             // Go to the next step automatically
-            goNext();
+            //
+            // The conditional here is lazy hack to deal with some
+            // non-standard behavior in one component.
+            //
+            // TODO: fix how this is handled in the long run
+            //
+            if (currentOrder == 15 && Session.get('componentNumber')) {
+                console.log('Not going next b/c the timer and the video length conflict.');
+            }
+            else {
+                goNext();
+            }
 
             // Clear timer. This must be done last or else you'll break
             // out of the conditional
