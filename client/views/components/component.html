@@ -5,7 +5,7 @@
       {{#with component}}
         <div class="component">
           <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
               <h3>
                 {{#if currentUser}}
                   <span id="text" data-type="text" data-field-name="componentNumber">
@@ -42,7 +42,7 @@
               </h3>
             </div>
             {{#if currentUser}}
-              <div class="col-sm-4 component-edit-btns">
+              <div class="col-sm-3 component-edit-btns">
                 <a href="#" id="edit-link" class="btn btn-primary">Edit</a>
                 {{> quickRemoveButton collection="Components" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}}
               </div>
