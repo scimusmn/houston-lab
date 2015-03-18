@@ -65,7 +65,7 @@
 
                 <!-- Step Audio -->
                 <audio id="stepAudio">
-                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?found" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?filc" type="audio/mpeg">
                 </audio>
 
                 <div class="controls">
@@ -179,11 +179,11 @@
                 <div class="col-sm-12">
                   <div class="btn-group btn-group-lg btn-group-justified" role="group" >
                     {{#if $.Session.equals 'currentLanguage' 'en'}}
-                      <!--<a href="#" id="check-hema" class="btn btn-default">Checking<br>Hematocrit</a>-->
+                      <a href="#" id="check-hema" class="btn btn-default">Checking<br>Hematocrit</a>
                       <a href="#" id="begin" class="btn btn-default">Looking at<br>Blood Cells</a>
                       <a href="#" id="blood-typing" class="btn btn-default">Blood<br>Typing</a>
                     {{else}}
-                      <!--<a href="#" id="check-hema" class="btn btn-default">Comprobación de<br>Hematocritos</a>-->
+                      <a href="#" id="check-hema" class="btn btn-default">Comprobación de<br>Hematocritos</a>
                       <a href="#" id="begin" class="btn btn-default">Mirar las<br>Células de la Sangre</a>
                       <a href="#" id="blood-typing" class="btn btn-default">Tipo<br>de Sangre</a>
                     {{/if}}
@@ -213,6 +213,32 @@
 </template>
 
 <template name="step">
+
+  {{#if $in order 32 38 39}}
+    <span class="notebook">
+      <h3>Notebook</h3>
+      <span class="notebook-data">
+        <p>Sample #1:<br><span class="sample-field" id="sample-1">{{hema1}}</span></p>
+        <p>Sample #2:<br><span class="sample-field" id="sample-2">{{hema2}}</span></p>
+      </span>
+      {{#if $in order 32 38}}
+      <span class="num-pad">
+        <span class="num-button" id="num-1">1</span>
+        <span class="num-button" id="num-2">2</span>
+        <span class="num-button" id="num-3">3</span>
+        <span class="num-button" id="num-4">4</span>
+        <span class="num-button" id="num-5">5</span>
+        <span class="num-button" id="num-6">6</span>
+        <span class="num-button" id="num-7">7</span>
+        <span class="num-button" id="num-8">8</span>
+        <span class="num-button" id="num-9">9</span>
+        <span class="num-button" id="num-0">0</span>
+        <span class="clear-button" id="num-clear">Clear</span>
+      </span>
+      {{/if}}
+    </span>
+  {{/if}}
+
 
   {{#if currentUser}}
     {{order}} -

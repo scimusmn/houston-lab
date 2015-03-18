@@ -60,6 +60,12 @@ Template.component.helpers({
 });
 
 Template.step.helpers({
+    hema1: function() {
+        return Session.get('hema1');
+    },
+    hema2: function() {
+        return Session.get('hema2');
+    },
     timerValue: function() {
         return Math.ceil(Session.get('timerValue'));
     }
@@ -74,6 +80,9 @@ Template.step.helpers({
 Template.component.rendered = function () {
 
     Session.set('componentNumber', this.data.component.componentNumber);
+
+    Session.set('hema1', '-');
+    Session.set('hema2', '-');
 
     /**
      * Set the a session value to track the currentOrder based on the URL
@@ -256,7 +265,45 @@ Template.component.events({
     'click #forward, click #begin': function(e) {
         e.preventDefault();
         goNext();
-    }
+    },
+
+    'click .num-button': function(e) {
+        console.log('Hema clicked');
+        console.log('e - ', e.currentTarget.innerHTML);
+        if (Session.get('currentOrder') == '32') {
+            var hema1 = Session.get('hema1');
+            console.log('hema1 - ', hema1);
+            if (hema1 == '-') {
+                hema1 = e.currentTarget.innerHTML;
+                Session.set('hema1', hema1);
+            }
+            else if (hema1.length == 1) {
+                Session.set('hema1', hema1 + e.currentTarget.innerHTML);
+            }
+        }
+        if (Session.get('currentOrder') == '38') {
+            var hema2 = Session.get('hema2');
+            console.log('hema2 - ', hema2);
+            if (hema2 == '-') {
+                hema2 = e.currentTarget.innerHTML;
+                Session.set('hema2', hema2);
+            }
+            else if (hema2.length == 1) {
+                Session.set('hema2', hema2 + e.currentTarget.innerHTML);
+            }
+        }
+    },
+
+    'click .clear-button': function(e) {
+        console.log('Clear clicked');
+        console.log('e - ', e.currentTarget.innerHTML);
+        if (Session.get('currentOrder') == '32') {
+            Session.set('hema1', '-');
+        }
+        if (Session.get('currentOrder') == '38') {
+            Session.set('hema2', '-');
+        }
+    },
 
 });
 

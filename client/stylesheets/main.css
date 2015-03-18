@@ -146,6 +146,7 @@ pre.copy {
   border-radius: 3px;
   background: #FAFAFA;
   color: #CCC;
+  clear: both;
 }
 
 div.step-active {
@@ -169,6 +170,51 @@ div.step-active {
   display: block;
   margin: 10px;
   font-size: 26px;
+}
+
+.notebook {
+  display: block;
+  height: 300px;
+  width: 400px;
+  top: 190px;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+}
+
+.sample-field {
+  display: block;
+  background: #EEE;
+  width: 60px;
+  height: 40px;
+  padding: 7px 19px;
+}
+
+.notebook-data {
+  display: block;
+  float: left;
+  width: 200px;
+}
+
+.num-pad {
+  display: block;
+  float: right;
+  width: 200px;
+}
+
+.num-button,
+.clear-button {
+  float: left;
+  text-align: center;
+  padding: 11px 5px;
+  margin: 5px;
+  background: #396;
+  width: 50px;
+  height: 50px;
+}
+
+.clear-button {
+  width: 110px;
 }
 
 /**
