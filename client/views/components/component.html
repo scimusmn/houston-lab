@@ -59,13 +59,13 @@
                   <div class="video-absent"></div>
                 {{else}}
                   <video id="stepVideo" class="video-js vjs-default-skin" preload="auto" width="320" height="240" data-setup="{}">
-                    <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4?agar" type='video/mp4' />
+                    <source src="/video/{{componentNumber}}/{{currentOrderPad}}.mp4?king" type='video/mp4' />
                   </video>
                 {{/if}}
 
                 <!-- Step Audio -->
                 <audio id="stepAudio">
-                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?drumrolls" type="audio/mpeg">
+                  <source src="/audio/{{componentNumber}}/{{currentOrderPad}}-{{currentLanguage}}.mp3?found" type="audio/mpeg">
                 </audio>
 
                 <div class="controls">
@@ -132,64 +132,82 @@
           </div><!-- /row -->
 
         </div><!-- /component -->
-      {{/with}}
 
-      <div class="navigation">
-        {{#if currentOrder}}
-          <div class="btn-group btn-group-lg btn-group-justified" role="group" >
+        <div class="navigation">
+          {{#if currentOrder}}
+            <div class="btn-group btn-group-lg btn-group-justified" role="group" >
 
-            <!-- Reset -->
-            <a href="#" id="reset" class="btn btn-default reset">
-              {{#if $.Session.equals 'currentLanguage' 'en'}}
-                Reset
-              {{else}}
-                Reiniciar
-              {{/if}}
-            </a>
-
-            <!-- Back -->
-            {{#if $neq currentOrder 1}}
-              <!-- Only display back when it isn't the same as Reset -->
-              <a href="#" id="back" class="btn btn-default">
+              <!-- Reset -->
+              <a href="#" id="reset" class="btn btn-default reset">
                 {{#if $.Session.equals 'currentLanguage' 'en'}}
-                  Previous
+                  Reset
                 {{else}}
-                  Anterior
+                  Reiniciar
                 {{/if}}
               </a>
-            {{/if}}
 
-            <!-- Next -->
-            {{#if $neq currentOrder maxOrder}}
-              <!-- Only display forward if you're not at the end -->
-              <a href="#" id="forward" class="btn btn-primary">
-                {{#if $.Session.equals 'currentLanguage' 'en'}}
-                  Next
-                {{else}}
-                  Siguiente
-                {{/if}}
-              </a>
-            {{/if}}
-
-          </div>
-        {{else}}
-
-          <!-- Begin -->
-          <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-              <div class="btn-group btn-group-lg btn-group-justified" role="group" >
-                <a href="#" id="begin" class="btn btn-default">
+              <!-- Back -->
+              {{#if $neq currentOrder 1}}
+                <!-- Only display back when it isn't the same as Reset -->
+                <a href="#" id="back" class="btn btn-default">
                   {{#if $.Session.equals 'currentLanguage' 'en'}}
-                    Begin
+                    Previous
                   {{else}}
-                    Comenzar
+                    Anterior
                   {{/if}}
                 </a>
-              </div>
+              {{/if}}
+
+              <!-- Next -->
+              {{#if $neq currentOrder maxOrder}}
+                <!-- Only display forward if you're not at the end -->
+                <a href="#" id="forward" class="btn btn-primary">
+                  {{#if $.Session.equals 'currentLanguage' 'en'}}
+                    Next
+                  {{else}}
+                    Siguiente
+                  {{/if}}
+                </a>
+              {{/if}}
+
             </div>
-          </div>
-        {{/if}}
-      </div> <!-- /navigation -->
+          {{else}}
+
+            <!-- Begin -->
+            {{#if $eq componentNumber '0107'}}
+              <div class="row" style="margin-top: -60px;">
+                <div class="col-sm-12">
+                  <div class="btn-group btn-group-lg btn-group-justified" role="group" >
+                    {{#if $.Session.equals 'currentLanguage' 'en'}}
+                      <!--<a href="#" id="check-hema" class="btn btn-default">Checking<br>Hematocrit</a>-->
+                      <a href="#" id="begin" class="btn btn-default">Looking at<br>Blood Cells</a>
+                      <a href="#" id="blood-typing" class="btn btn-default">Blood<br>Typing</a>
+                    {{else}}
+                      <!--<a href="#" id="check-hema" class="btn btn-default">Comprobación de<br>Hematocritos</a>-->
+                      <a href="#" id="begin" class="btn btn-default">Mirar las<br>Células de la Sangre</a>
+                      <a href="#" id="blood-typing" class="btn btn-default">Tipo<br>de Sangre</a>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            {{else}}
+              <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div class="btn-group btn-group-lg btn-group-justified" role="group" >
+                    <a href="#" id="begin" class="btn btn-default">
+                      {{#if $.Session.equals 'currentLanguage' 'en'}}
+                        Begin
+                      {{else}}
+                        Comenzar
+                      {{/if}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+          {{/if}}
+        </div> <!-- /navigation -->
+      {{/with}}
     </div> <!-- /col-sm-10 -->
   </div> <!-- /row -->
 </template>
@@ -201,9 +219,9 @@
   {{/if}}
 
   {{#if $.Session.equals 'currentLanguage' 'en'}}
-    {{title}}
+    {{{title}}}
   {{else}}
-    {{titleEs}}
+    {{{titleEs}}}
   {{/if}}
 
   {{#if currentUser}}

@@ -92,7 +92,9 @@ Template.component.rendered = function () {
     }
 
     // Disable video on some steps
-    setVideoState(Session.get('currentOrder'));
+    if (Session.get('currentOrder') !== 0) {
+        setVideoState(Session.get('currentOrder'));
+    }
 
     /**
      * Setup page content based on the currentOrder
@@ -241,6 +243,16 @@ Template.component.events({
         goPrevious();
     },
 
+    'click #check-hema': function(e) {
+        e.preventDefault();
+        Router.go('/components/0109-check-hema');
+    },
+
+    'click #blood-typing': function(e) {
+        e.preventDefault();
+        Router.go('/components/0110-blood-typing');
+    },
+
     'click #forward, click #begin': function(e) {
         e.preventDefault();
         goNext();
@@ -253,27 +265,31 @@ Template.component.events({
  */
 function goReset() {
     if (Session.get('navBlock')) {
-        console.log('Navigation blocked');
         return;
     }
 
-    Session.set('currentOrder', 0);
+    console.log('componentNumber', Session.get('componentNumber'));
+    if (Session.get('componentNumber') == '0110' || Session.get('componentNumber') == '0109') {
+        Router.go('/components/0107-blood-bench');
+    }
+    else {
+        Session.set('currentOrder', 0);
 
-    // Animate out steps
-    $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
+        // Animate out steps
+        $('div.step-container div.bounceInRight').removeClass().addClass('animated bounceOutRight');
 
-    // Make the URL match the current step
-    var nextOrder = 0;
-    setURL(nextOrder);
+        // Make the URL match the current step
+        var nextOrder = 0;
+        setURL(nextOrder);
 
-    Meteor.setTimeout(function(){
-        playMedia('audio', 'bodyAudio');
-    }, 500);
+        Meteor.setTimeout(function(){
+            playMedia('audio', 'bodyAudio');
+        }, 500);
+    }
 }
 
 function goPrevious() {
     if (Session.get('navBlock')) {
-        console.log('Navigation blocked');
         return;
     }
 
@@ -360,7 +376,6 @@ function goPrevious() {
 
 function goNext() {
     if (Session.get('navBlock')) {
-        console.log('Navigation blocked');
         return;
     }
 

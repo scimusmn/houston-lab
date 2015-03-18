@@ -11,7 +11,8 @@ function order() {
 }
 
 Template.stepSubmit.rendered = function() {
-    //
+    // Disable keyboard navigation
+    Session.set('navBlock', true);
 };
 
 /**

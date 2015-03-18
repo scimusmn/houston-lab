@@ -50,7 +50,7 @@ Steps.attachSchema(new SimpleSchema({
         type: String,
         label: 'Step',
         min: 4,
-        max: 1000,
+        max: 10000,
         autoform: {
             rows: 5
         }
@@ -59,7 +59,7 @@ Steps.attachSchema(new SimpleSchema({
         type: String,
         label: 'Step - Spanish',
         min: 4,
-        max: 1000,
+        max: 10000,
         autoform: {
             rows: 5
         }

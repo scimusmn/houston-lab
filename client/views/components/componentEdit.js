@@ -1,4 +1,7 @@
 Template.componentEdit.rendered = function () {
+    // Disable keyboard navigation
+    Session.set('navBlock', true);
+
     $('input[name="componentNumber"]').focus();
 };
 
