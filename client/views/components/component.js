@@ -27,7 +27,9 @@ Template.component.helpers({
     },
     currentOrderPad: function () {
         var currentOrder = Session.get('currentOrder');
-        return _s.lpad(currentOrder, 4, '0');
+        var currentOrderPad = _s.lpad(currentOrder, 4, '0');
+        console.log('currentOrderPad - ', currentOrderPad);
+        return currentOrderPad;
     },
     maxOrder: function () {
         return maxOrder();
@@ -56,6 +58,27 @@ Template.component.helpers({
     // Dev mouse position helper
     mouseCoord: function () {
         return Session.get('mouseCoord');
+    },
+
+    disableNext: function() {
+        var currentOrder = Session.get('currentOrder');
+        var componentNumber = Session.get('componentNumber');
+        if (currentOrder == 43 && componentNumber == '0105') {
+          return true;
+        } else {
+          return false;
+        }
+    },
+
+    mysteryMicrobesChoice: function() {
+        var currentOrder = Session.get('currentOrder');
+        var componentNumber = Session.get('componentNumber');
+        if (currentOrder == 35 && componentNumber == '0105') {
+          return true;
+        } else {
+          return false;
+        }
+
     }
 });
 
@@ -262,6 +285,21 @@ Template.component.events({
         Router.go('/components/0110-blood-typing');
     },
 
+    'click #catalase-test': function(e) {
+        e.preventDefault();
+        console.log('Catalayse test');
+        Router.go('/components/0105-mystery-microbes#step-0036');
+        goNext();
+    },
+
+    'click #indole-test': function(e) {
+        e.preventDefault();
+        console.log('Indole test');
+        Session.set('currentOrder', 43);
+        goNext();
+    },
+
+
     'click #forward, click #begin': function(e) {
         e.preventDefault();
         goNext();
@@ -346,8 +384,16 @@ function goPrevious() {
     var currentOrder;
     var nextOrder;
     if (Session.get('currentOrder')) {
-        currentOrder = Session.get('currentOrder');
+      var componentNumber = Session.get('componentNumber');
+      currentOrder = Session.get('currentOrder');
+      if (currentOrder == 44 && componentNumber == '0105') {
+        $('div[data-order=' + currentOrder + '] div').removeClass().addClass('animated bounceOutRight');
+        currentOrder = 36;
+        nextOrder = 35;
+      }
+      else {
         nextOrder = (currentOrder - 1);
+      }
     }
     else {
         currentOrder = 0;
