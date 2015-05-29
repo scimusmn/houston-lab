@@ -9,6 +9,22 @@ body {
   user-select: none;
 }
 
+#screensaver {
+  width: 1024px;
+  max-width: 1024px;
+  height: 768px;
+  padding: 0;
+  background: lighten(@background-tan, 10%);
+  font-size: 80px;
+  color: #FFF;
+  z-index: 9999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+  overflow: hidden;
+}
+
 .container {
   max-width: 1024px;
   height: 750px;
