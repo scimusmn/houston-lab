@@ -35,6 +35,18 @@ console.log('Meteor - ', Meteor);
 console.log('Meteor.settings.public - ', Meteor.settings);
 
 Template.layout.events({
+    'mousemove': function(event, template) {
+        // Reset the screensaver timer
+        clearTimeout(sSaver);
+        saveScreen(sSaverTimeout);
+    },
+
+    'mouseup': function(event, template) {
+        // Reset the screensaver timer
+        clearTimeout(sSaver);
+        saveScreen(sSaverTimeout);
+    },
+
     'click #screensaver': function(e){
         // Fade the screensaver
         // It's important to hide the element or nothing underneath
@@ -129,7 +141,6 @@ function saveScreen(sSaverTimeout) {
     var audio = $('audio')[0];
     audio.pause();
     audio.currentTime = 0;
-
     $('#screensaver').removeClass('animated fadeOut');
     $('#screensaver').addClass('animated fadeIn');
     $('#screensaver').show();
