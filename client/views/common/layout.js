@@ -4,9 +4,9 @@ Template.layout.rendered = function () {
         $('.en-switch').addClass('active');
     }
     var sSaver;
-    //sSaverTimeout = 180000;
+    sSaverTimeout = 300000;
     // Dev timeout
-    sSaverTimeout = 5000;
+    //sSaverTimeout = 5000;
 
     clearTimeout(sSaver);
     saveScreen(sSaverTimeout);
